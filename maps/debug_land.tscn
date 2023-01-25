@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dml4pqh4lsngj"]
+
+[ext_resource type="PackedScene" uid="uid://cha55qk8nsaee" path="res://entities/player/player.tscn" id="1_mutb7"]
+
+[sub_resource type="TileSet" id="TileSet_t8ihy"]
+
+[node name="DebugLand" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+zoom = Vector2(4, 4)
+
+[node name="Player" parent="." instance=ExtResource("1_mutb7")]
+position = Vector2(78, 54)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_t8ihy")
+format = 2
