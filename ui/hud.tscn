@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6skg3rcf68dr"]
+
+[ext_resource type="Texture2D" uid="uid://dgc4pukx5qva" path="res://ui/hud.png" id="1_rc7yi"]
+[ext_resource type="Texture2D" uid="uid://bnrjw1taux5vj" path="res://ui/items/sword.png" id="2_6xjjv"]
+[ext_resource type="PackedScene" uid="uid://b7bucb4or4jxc" path="res://ui/hearts.tscn" id="3_kjbde"]
+
+[node name="Hud" type="CanvasLayer"]
+scale = Vector2(4, 4)
+transform = Transform2D(4, 0, 0, 4, 0, 0)
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_rc7yi")
+centered = false
+
+[node name="B_Item" type="Sprite2D" parent="."]
+position = Vector2(20, 8)
+texture = ExtResource("2_6xjjv")
+
+[node name="Hearts" parent="." instance=ExtResource("3_kjbde")]
+position = Vector2(104, 0)
+metadata/_edit_lock_ = true

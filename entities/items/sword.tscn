@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bw2oehx1j7o4i" path="res://entities/player/link.png" id="1_3shaq"]
 [ext_resource type="Script" path="res://entities/items/sword.gd" id="1_k7ui7"]
 
-[sub_resource type="Animation" id="Animation_s4vhg"]
+[sub_resource type="Animation" id="Animation_l1c0x"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -91,7 +91,7 @@ tracks/6/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_s4tts"]
+[sub_resource type="Animation" id="Animation_u8l8m"]
 resource_name = "SwingDown"
 step = 0.33
 tracks/0/type = "value"
@@ -193,7 +193,7 @@ tracks/7/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_4xhyt"]
+[sub_resource type="Animation" id="Animation_7dhkr"]
 resource_name = "SwingLeft"
 step = 0.33
 tracks/0/type = "value"
@@ -295,7 +295,7 @@ tracks/7/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_5le2s"]
+[sub_resource type="Animation" id="Animation_ew0b4"]
 resource_name = "SwingRight"
 step = 0.33
 tracks/0/type = "value"
@@ -397,7 +397,7 @@ tracks/7/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_r4pss"]
+[sub_resource type="Animation" id="Animation_gvehh"]
 resource_name = "SwingUp"
 step = 0.33
 tracks/0/type = "value"
@@ -499,16 +499,16 @@ tracks/7/keys = {
 "values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uj4wl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_clnlh"]
 _data = {
-"RESET": SubResource("Animation_s4vhg"),
-"SwingDown": SubResource("Animation_s4tts"),
-"SwingLeft": SubResource("Animation_4xhyt"),
-"SwingRight": SubResource("Animation_5le2s"),
-"SwingUp": SubResource("Animation_r4pss")
+"RESET": SubResource("Animation_l1c0x"),
+"SwingDown": SubResource("Animation_u8l8m"),
+"SwingLeft": SubResource("Animation_7dhkr"),
+"SwingRight": SubResource("Animation_ew0b4"),
+"SwingUp": SubResource("Animation_gvehh")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypokr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sse0f"]
 size = Vector2(16, 16)
 
 [node name="Sword" type="Node2D"]
@@ -517,7 +517,7 @@ script = ExtResource("1_k7ui7")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
 libraries = {
-"": SubResource("AnimationLibrary_uj4wl")
+"": SubResource("AnimationLibrary_clnlh")
 }
 
 [node name="Reference" type="Sprite2D" parent="."]
@@ -539,5 +539,5 @@ position = Vector2(0, -15)
 scale = Vector2(0.4, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_ypokr")
+shape = SubResource("RectangleShape2D_sse0f")
 metadata/_edit_lock_ = true

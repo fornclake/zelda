@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7bucb4or4jxc"]
+
+[ext_resource type="Script" path="res://ui/hearts.gd" id="1_tu63r"]
+
+[node name="Hearts" type="Node2D"]
+script = ExtResource("1_tu63r")
+heart_count = 10
+health = 6.25

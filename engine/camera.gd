@@ -7,10 +7,13 @@ const CELL_SIZE = Vector2(256, 176)
 const VIEWPORT_SIZE = Vector2(160, 144)
 const SCROLL_DURATION = 0.5
 
-var is_scrolling = false
-
 func _ready():
 	last_grid_position = _get_target_grid_position()
+	var target_origin = last_grid_position * CELL_SIZE
+	limit_left = target_origin.x
+	limit_right = target_origin.x + CELL_SIZE.x
+	limit_top = target_origin.y
+	limit_bottom = target_origin.y + CELL_SIZE.y
 
 func _physics_process(delta):
 	var target_grid_position = _get_target_grid_position()
