@@ -80,6 +80,10 @@ b={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Physics"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

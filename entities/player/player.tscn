@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cha55qk8nsaee"]
+[gd_scene load_steps=16 format=3 uid="uid://cha55qk8nsaee"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_4v2fk"]
 [ext_resource type="Texture2D" uid="uid://bw2oehx1j7o4i" path="res://entities/player/link.png" id="1_w4kfg"]
@@ -186,9 +186,13 @@ _data = {
 radius = 5.0
 height = 12.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hmn57"]
+size = Vector2(12, 14)
+
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_4v2fk")
+entity_type = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
@@ -208,3 +212,9 @@ shape = SubResource("CapsuleShape2D_q8082")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 visible = false
+
+[node name="Hitbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_hmn57")

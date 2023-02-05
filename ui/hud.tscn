@@ -18,4 +18,6 @@ texture = ExtResource("2_6xjjv")
 
 [node name="Hearts" parent="." instance=ExtResource("3_kjbde")]
 position = Vector2(104, 0)
+heart_count = 7
+health = 7.0
 metadata/_edit_lock_ = true
