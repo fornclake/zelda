@@ -1,7 +1,7 @@
 extends Node2D
 class_name Item
 
-var user : Entity
+@export var damage := 0.5
 
-func activate(u):
-	user = u
+var user : Entity
+var entity_type

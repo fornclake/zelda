@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cxg5v2s4mmbul" path="res://maps/overworld/reference.png" id="1_kj0oq"]
 [ext_resource type="Texture2D" uid="uid://cuca3me4e5up8" path="res://tilesets/seasons.png" id="2_5bbp5"]
-[ext_resource type="PackedScene" uid="uid://cha55qk8nsaee" path="res://entities/player/player.tscn" id="2_fs40q"]
+[ext_resource type="PackedScene" uid="uid://dtrlj82v8h6ru" path="res://entities/player/player.tscn" id="2_fs40q"]
 [ext_resource type="Texture2D" uid="uid://dyvnd4108em5i" path="res://tilesets/ages.png" id="3_ygmbb"]
 [ext_resource type="Texture2D" uid="uid://cwtbjq6epn5ux" path="res://tilesets/oracles.png" id="4_41cdi"]
 [ext_resource type="Texture2D" uid="uid://dsisswua5daye" path="res://tilesets/interactive.png" id="5_jujkv"]
@@ -14057,5 +14057,10 @@ target = NodePath("../Player")
 
 [node name="Hud" parent="." instance=ExtResource("8_jj1bb")]
 
+[node name="Hearts" parent="Hud" index="2"]
+target = NodePath("../../Player")
+
 [node name="Octorok" parent="." instance=ExtResource("9_3n4sn")]
 position = Vector2(1884, 1353)
+
+[editable path="Hud"]

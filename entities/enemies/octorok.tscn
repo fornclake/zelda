@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://0n5vrqnoj5y4"]
+[gd_scene load_steps=12 format=3 uid="uid://0n5vrqnoj5y4"]
 
 [ext_resource type="Script" path="res://entities/enemies/octorok.gd" id="1_1xorg"]
 [ext_resource type="Texture2D" uid="uid://bpjsbq4wo1at7" path="res://entities/enemies/octorok.png" id="1_5qjiv"]
+[ext_resource type="Shader" path="res://shaders/entity.gdshader" id="2_7e78j"]
 
 [sub_resource type="Animation" id="Animation_q3208"]
 length = 0.001
@@ -161,6 +162,10 @@ _data = {
 "WalkUp": SubResource("Animation_himbb")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ex4yk"]
+shader = ExtResource("2_7e78j")
+shader_parameter/is_hurt = false
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_14nd2"]
 radius = 5.0
 height = 12.0
@@ -181,6 +186,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ex4yk")
 texture = ExtResource("1_5qjiv")
 hframes = 4
 

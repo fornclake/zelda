@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bw2oehx1j7o4i" path="res://entities/player/link.png" id="1_3shaq"]
 [ext_resource type="Script" path="res://entities/items/sword.gd" id="1_k7ui7"]
 
-[sub_resource type="Animation" id="Animation_4ts77"]
+[sub_resource type="Animation" id="Animation_g6b0q"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -57,7 +57,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Area2D:position")
+tracks/4/path = NodePath("Hitbox:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -69,7 +69,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Area2D:scale")
+tracks/5/path = NodePath("Hitbox:scale")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -91,7 +91,7 @@ tracks/6/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_s886f"]
+[sub_resource type="Animation" id="Animation_vggg6"]
 resource_name = "SwingDown"
 step = 0.33
 tracks/0/type = "value"
@@ -159,7 +159,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Area2D:position")
+tracks/5/path = NodePath("Hitbox:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -171,7 +171,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Area2D:scale")
+tracks/6/path = NodePath("Hitbox:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -193,7 +193,7 @@ tracks/7/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_tj8g7"]
+[sub_resource type="Animation" id="Animation_syv8k"]
 resource_name = "SwingLeft"
 step = 0.33
 tracks/0/type = "value"
@@ -261,7 +261,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Area2D:position")
+tracks/5/path = NodePath("Hitbox:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -273,7 +273,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Area2D:scale")
+tracks/6/path = NodePath("Hitbox:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -295,7 +295,7 @@ tracks/7/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_kggf5"]
+[sub_resource type="Animation" id="Animation_w7pue"]
 resource_name = "SwingRight"
 step = 0.33
 tracks/0/type = "value"
@@ -363,7 +363,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Area2D:position")
+tracks/5/path = NodePath("Hitbox:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -375,7 +375,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Area2D:scale")
+tracks/6/path = NodePath("Hitbox:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -397,7 +397,7 @@ tracks/7/keys = {
 "values": [false]
 }
 
-[sub_resource type="Animation" id="Animation_mafcc"]
+[sub_resource type="Animation" id="Animation_e5efh"]
 resource_name = "SwingUp"
 step = 0.33
 tracks/0/type = "value"
@@ -465,7 +465,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Area2D:position")
+tracks/5/path = NodePath("Hitbox:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -477,7 +477,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Area2D:scale")
+tracks/6/path = NodePath("Hitbox:scale")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -499,16 +499,16 @@ tracks/7/keys = {
 "values": [false]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqsiv"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dv6ra"]
 _data = {
-"RESET": SubResource("Animation_4ts77"),
-"SwingDown": SubResource("Animation_s886f"),
-"SwingLeft": SubResource("Animation_tj8g7"),
-"SwingRight": SubResource("Animation_kggf5"),
-"SwingUp": SubResource("Animation_mafcc")
+"RESET": SubResource("Animation_g6b0q"),
+"SwingDown": SubResource("Animation_vggg6"),
+"SwingLeft": SubResource("Animation_syv8k"),
+"SwingRight": SubResource("Animation_w7pue"),
+"SwingUp": SubResource("Animation_e5efh")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_846ve"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdmyk"]
 size = Vector2(16, 16)
 
 [node name="Sword" type="Node2D"]
@@ -517,7 +517,7 @@ script = ExtResource("1_k7ui7")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
 libraries = {
-"": SubResource("AnimationLibrary_fqsiv")
+"": SubResource("AnimationLibrary_dv6ra")
 }
 
 [node name="Reference" type="Sprite2D" parent="."]
@@ -533,11 +533,10 @@ position = Vector2(0, -16)
 texture = ExtResource("1_0sil7")
 hframes = 2
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
+[node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(0, -15)
 scale = Vector2(0.4, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_846ve")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_pdmyk")
 metadata/_edit_lock_ = true

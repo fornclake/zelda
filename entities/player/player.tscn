@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://cha55qk8nsaee"]
+[gd_scene load_steps=18 format=3 uid="uid://dtrlj82v8h6ru"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_4v2fk"]
 [ext_resource type="Texture2D" uid="uid://bw2oehx1j7o4i" path="res://entities/player/link.png" id="1_w4kfg"]
+[ext_resource type="Shader" path="res://shaders/entity.gdshader" id="2_iykb3"]
 
 [sub_resource type="Animation" id="Animation_0ca6j"]
 resource_name = "PushDown"
@@ -182,6 +183,10 @@ _data = {
 "WalkUp": SubResource("Animation_5s6dn")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1j07o"]
+shader = ExtResource("2_iykb3")
+shader_parameter/is_hurt = false
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q8082"]
 radius = 5.0
 height = 12.0
@@ -193,6 +198,8 @@ size = Vector2(12, 14)
 motion_mode = 1
 script = ExtResource("1_4v2fk")
 entity_type = 1
+hearts = 7.0
+damage = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
@@ -202,6 +209,7 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1j07o")
 texture = ExtResource("1_w4kfg")
 hframes = 6
 vframes = 6

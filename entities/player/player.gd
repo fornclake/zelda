@@ -10,7 +10,7 @@ var input_vector = Vector2.ZERO
 func _physics_process(delta):
 	input_vector = _get_input_vector()
 	
-	current_state.call()
+	_state_process(delta)
 	
 	if input_vector.x == 0 or input_vector.y == 0:
 		ray.target_position = input_vector * 8

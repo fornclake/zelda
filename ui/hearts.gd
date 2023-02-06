@@ -1,4 +1,6 @@
-@tool extends Node2D
+extends Node2D
+
+@export_node_path(Entity) var target
 
 @export_range(1,14) var heart_count : int = 3 : set = _set_heart_count
 @export_range(0,14,0.25) var health : float = 3.0 : set = _set_health
@@ -6,6 +8,15 @@
 const HEART_TEXTURE = preload("res://ui/hearts.png")
 const HEART_SIZE = Vector2(8,8)
 const ROW_COUNT = 7
+
+func _ready():
+	target = get_node(target)
+	_update_hearts()
+	target.connect("on_hit", _update_hearts)
+
+func _update_hearts():
+	heart_count = target.hearts
+	health = target.health
 
 func _set_heart_count(value):
 	heart_count = value
