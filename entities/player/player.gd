@@ -14,8 +14,6 @@ func _physics_process(delta):
 	
 	if input_vector.x == 0 or input_vector.y == 0:
 		ray.target_position = input_vector * 8
-	
-	sprite.flip_h = (sprite_direction == "Left")
 
 func state_default():
 	velocity = input_vector * speed

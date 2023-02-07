@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name Entity
 
 const SWORD = preload("res://entities/items/sword.tscn")
-
 const SHADER = preload("res://shaders/entity.gdshader")
 const DEATH_FX = preload("res://effects/enemy_death.tscn")
 
@@ -10,7 +9,6 @@ const KB_TIME = 0.25
 const KB_AMT = 75
 
 @export_enum("Enemy", "Player") var entity_type
-
 @export var hearts : float = 1.0
 @export var speed : float = 70
 @export var damage : float = 0.5
@@ -81,6 +79,7 @@ func set_animation(animation : String):
 	if sprite_direction in ["Left", "Right"]:
 		direction = "Side"
 	anim.play(str(animation, direction))
+	sprite.flip_h = sprite_direction == "Left"
 
 func _use_item(item):
 	var instance = item.instantiate()
