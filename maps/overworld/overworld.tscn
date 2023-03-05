@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://4a64vt5fpfcu"]
+[gd_scene load_steps=14 format=3 uid="uid://4a64vt5fpfcu"]
 
 [ext_resource type="Texture2D" uid="uid://cxg5v2s4mmbul" path="res://maps/overworld/reference.png" id="1_kj0oq"]
 [ext_resource type="Texture2D" uid="uid://cuca3me4e5up8" path="res://tilesets/seasons.png" id="2_5bbp5"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dsisswua5daye" path="res://tilesets/interactive.png" id="5_jujkv"]
 [ext_resource type="Script" path="res://engine/camera.gd" id="7_4dct5"]
 [ext_resource type="PackedScene" uid="uid://c6skg3rcf68dr" path="res://ui/hud.tscn" id="8_jj1bb"]
-[ext_resource type="PackedScene" uid="uid://0n5vrqnoj5y4" path="res://entities/enemies/octorok.tscn" id="9_3n4sn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aoumb"]
 resource_name = "seasons"
@@ -14050,7 +14049,6 @@ position = Vector2(1916, 1314)
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(1916, 1314)
-current = true
 zoom = Vector2(4, 4)
 script = ExtResource("7_4dct5")
 target = NodePath("../Player")
@@ -14059,8 +14057,5 @@ target = NodePath("../Player")
 
 [node name="Hearts" parent="Hud" index="2"]
 target = NodePath("../../Player")
-
-[node name="Octorok" parent="." instance=ExtResource("9_3n4sn")]
-position = Vector2(1884, 1353)
 
 [editable path="Hud"]

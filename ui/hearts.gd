@@ -1,6 +1,6 @@
 extends Node2D
 
-@export_node_path(Entity) var target
+@export_node_path("Entity") var target
 
 @export_range(1,14) var heart_count : int = 3 : set = _set_heart_count
 @export_range(0,14,0.25) var health : float = 3.0 : set = _set_health

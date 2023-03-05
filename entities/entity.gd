@@ -19,33 +19,36 @@ var current_state = state_default
 var last_state = state_default
 var state_counter := 0.0
 
-@onready var anim = $AnimationPlayer
-@onready var sprite = $Sprite2D
+@onready var sprite = $AnimatedSprite2D
 @onready var hitbox = $Hitbox
 
 signal on_hit
+
 
 func _ready():
 	sprite.material.shader = SHADER
 	hitbox.connect("body_entered", _on_hitbox_body_entered)
 	hitbox.connect("area_entered", _on_hitbox_area_entered)
 
+
 func _physics_process(delta):
 	_state_process(delta)
 
+
 func _state_process(delta):
-	state_counter += delta
-	
 	current_state.call()
-	
 	last_state = current_state
+	state_counter += delta
+
 
 func change_state(new_state):
 	current_state = new_state
 	state_counter = 0
 
+
 func state_default():
 	pass
+
 
 func state_hurt():
 	sprite.material.set_shader_parameter("is_hurt", true)
@@ -63,6 +66,7 @@ func state_hurt():
 		sprite.material.set_shader_parameter("is_hurt", false)
 		change_state(state_default)
 
+
 func _update_sprite_direction(vector : Vector2):
 	match vector:
 		Vector2.LEFT:
@@ -74,17 +78,20 @@ func _update_sprite_direction(vector : Vector2):
 		Vector2.DOWN:
 			sprite_direction = "Down"
 
+
 func set_animation(animation : String):
 	var direction = sprite_direction
 	if sprite_direction in ["Left", "Right"]:
 		direction = "Side"
-	anim.play(str(animation, direction))
+	sprite.play(str(animation, direction))
 	sprite.flip_h = sprite_direction == "Left"
+
 
 func _use_item(item):
 	var instance = item.instantiate()
 	get_parent().add_child(instance)
 	instance.activate(self)
+
 
 func _get_random_direction():
 	var rng = randi() % 4
@@ -98,10 +105,12 @@ func _get_random_direction():
 		3:
 			return Vector2.DOWN
 
+
 func _on_hitbox_body_entered(body):
 	if body is Entity:
 		if body.entity_type != entity_type and body.damage > 0:
 			hit(body.damage, body.position)
+
 
 func _on_hitbox_area_entered(area):
 	var item = area.get_parent()
@@ -109,9 +118,9 @@ func _on_hitbox_area_entered(area):
 		if item.entity_type != entity_type and item.damage > 0:
 			hit(item.damage, item.position)
 
+
 func hit(amount, pos):
 	change_state(state_hurt)
 	health -= amount
 	velocity = (position - pos).normalized() * KB_AMT
 	emit_signal("on_hit")
-

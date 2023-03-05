@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bsdbtm20k5v8k" path="res://entities/projectiles/rok.png" id="1_owenn"]
 [ext_resource type="Script" path="res://entities/projectiles/rok.gd" id="1_tb4up"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_xgsm6"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_v4qb2"]
 radius = 4.0
 
 [node name="Rok" type="Node2D"]
@@ -15,4 +15,4 @@ texture = ExtResource("1_owenn")
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_xgsm6")
+shape = SubResource("CircleShape2D_v4qb2")
