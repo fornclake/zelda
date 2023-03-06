@@ -1,8 +1,5 @@
 extends Entity
 
-enum State {DEFAULT, SWING}
-
-var state = State.DEFAULT
 var input_direction:
 	get: return Input.get_vector("left", "right", "up", "down")
 
@@ -31,8 +28,8 @@ func state_default():
 		set_animation("Walk")
 		sprite.stop()
 	
-	#if Input.is_action_just_pressed("b"):
-	#	_use_item(SWORD)
+	if Input.is_action_just_pressed("b"):
+		_use_item(SWORD)
 
 
 func state_swing():

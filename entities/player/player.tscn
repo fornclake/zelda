@@ -1,12 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://dtrlj82v8h6ru"]
+[gd_scene load_steps=24 format=3 uid="uid://dtrlj82v8h6ru"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_4v2fk"]
 [ext_resource type="Texture2D" uid="uid://bw2oehx1j7o4i" path="res://entities/player/link.png" id="1_w4kfg"]
-[ext_resource type="Shader" path="res://shaders/entity.gdshader" id="2_iykb3"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8oase"]
-shader = ExtResource("2_iykb3")
-shader_parameter/is_hurt = false
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_haewf"]
 atlas = ExtResource("1_w4kfg")
@@ -31,6 +26,30 @@ region = Rect2(64, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wrjf"]
 atlas = ExtResource("1_w4kfg")
 region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_12lrg"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(0, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drfpr"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(16, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4epmx"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(32, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1na5"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(48, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ykf3p"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(64, 64, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p45f"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(80, 64, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oqv25"]
 atlas = ExtResource("1_w4kfg")
@@ -93,6 +112,48 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_12lrg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drfpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drfpr")
+}],
+"loop": false,
+"name": &"SwingDown",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4epmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1na5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1na5")
+}],
+"loop": false,
+"name": &"SwingSide",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ykf3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p45f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p45f")
+}],
+"loop": false,
+"name": &"SwingUp",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_oqv25")
 }, {
 "duration": 1.0,
@@ -140,7 +201,6 @@ hearts = 7.0
 damage = 0.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("ShaderMaterial_8oase")
 sprite_frames = SubResource("SpriteFrames_ties8")
 animation = &"WalkDown"
 autoplay = "WalkDown"

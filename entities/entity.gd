@@ -26,6 +26,7 @@ signal on_hit
 
 
 func _ready():
+	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = SHADER
 	hitbox.connect("body_entered", _on_hitbox_body_entered)
 	hitbox.connect("area_entered", _on_hitbox_area_entered)
@@ -60,7 +61,7 @@ func state_hurt():
 			var fx = DEATH_FX.instantiate()
 			get_parent().add_child(fx)
 			fx.position = position
-			fx.playing = true
+			fx.play()
 			queue_free()
 		
 		sprite.material.set_shader_parameter("is_hurt", false)
@@ -80,10 +81,8 @@ func _update_sprite_direction(vector : Vector2):
 
 
 func set_animation(animation : String):
-	var direction = sprite_direction
-	if sprite_direction in ["Left", "Right"]:
-		direction = "Side"
-	sprite.play(str(animation, direction))
+	var direction = "Side" if sprite_direction in ["Left", "Right"] else sprite_direction
+	sprite.play(animation + direction)
 	sprite.flip_h = sprite_direction == "Left"
 
 

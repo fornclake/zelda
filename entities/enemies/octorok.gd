@@ -21,12 +21,13 @@ func state_move():
 	
 	_update_sprite_direction(move_direction)
 	set_animation("Walk")
+	sprite.flip_v = (sprite_direction == "Up")
 	
 	if state_counter > move_time:
 		change_state(state_wait1)
 
 func state_wait1():
-	anim.stop()
+	sprite.stop()
 	
 	if state_counter > wait1_time:
 		_use_item(ROK)
