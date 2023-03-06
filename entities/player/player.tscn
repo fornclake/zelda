@@ -142,7 +142,8 @@ damage = 0.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_8oase")
 sprite_frames = SubResource("SpriteFrames_ties8")
-animation = &"PushDown"
+animation = &"WalkDown"
+autoplay = "WalkDown"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

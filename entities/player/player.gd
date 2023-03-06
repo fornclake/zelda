@@ -3,7 +3,7 @@ extends Entity
 enum State {DEFAULT, SWING}
 
 var state = State.DEFAULT
-var input_vector:
+var input_direction:
 	get: return Input.get_vector("left", "right", "up", "down")
 
 @onready var ray = $RayCast2D
@@ -12,15 +12,15 @@ var input_vector:
 func _physics_process(delta):
 	_state_process(delta)
 	
-	if input_vector.x == 0 or input_vector.y == 0:
-		ray.target_position = input_vector * 8
+	if input_direction.x == 0 or input_direction.y == 0:
+		ray.target_position = input_direction * 8
 
 
 func state_default():
-	velocity = input_vector * speed
+	velocity = input_direction * speed
 	move_and_slide()
 	
-	_update_sprite_direction(input_vector)
+	_update_sprite_direction(input_direction)
 	
 	if velocity:
 		if is_on_wall() and ray.is_colliding():
