@@ -515,7 +515,7 @@ size = Vector2(16, 16)
 script = ExtResource("1_k7ui7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 3.0
+speed_scale = 4.0
 libraries = {
 "": SubResource("AnimationLibrary_27f1i")
 }

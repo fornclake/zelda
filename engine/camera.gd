@@ -1,18 +1,21 @@
 extends Camera2D
 
-@export var target : Node2D
-@onready var last_grid_position = _get_target_grid_position()
-
+const DEFAULT_LIMIT_RECT = Rect2(-10000000, -10000000, 10000000, 10000000)
 const CELL_SIZE = Vector2(256, 176)
 const VIEWPORT_SIZE = Vector2(160, 144)
 const SCROLL_DURATION = 0.5
 
+@export var target : Node2D
+
+var limit_rect = DEFAULT_LIMIT_RECT: set = _set_limit_rect
+
+@onready var last_grid_position = _get_target_grid_position()
+
+
 func _ready():
-	var target_origin = last_grid_position * CELL_SIZE
-	limit_left = target_origin.x
-	limit_right = target_origin.x + CELL_SIZE.x
-	limit_top = target_origin.y
-	limit_bottom = target_origin.y + CELL_SIZE.y
+	var origin = last_grid_position * CELL_SIZE
+	limit_rect = Rect2(origin, origin + CELL_SIZE)
+
 
 func _physics_process(delta):
 	var target_grid_position = _get_target_grid_position()
@@ -24,19 +27,20 @@ func _physics_process(delta):
 	
 	last_grid_position = target_grid_position
 
+
 func scroll_screen():
 	var scroll_from = get_screen_center_position()
 	var target_origin = _get_target_grid_position() * CELL_SIZE
 	set_physics_process(false)
 	target.set_physics_process(false)
 	
-	_set_limits()
+	limit_rect = DEFAULT_LIMIT_RECT
 	
 	var scroll_to = target.position
 	var scroll_to_min = target_origin + VIEWPORT_SIZE / 2
 	var scroll_to_max = target_origin + CELL_SIZE - VIEWPORT_SIZE / 2
 	scroll_to.x = clamp(scroll_to.x, scroll_to_min.x, scroll_to_max.x)
-	scroll_to.y = clamp(scroll_to.y, scroll_to_min.y, scroll_to_max.y)
+	scroll_to.y = clamp(scroll_to.y, scroll_to_min.y - 16, scroll_to_max.y)
 	
 	position = scroll_from
 	
@@ -44,20 +48,26 @@ func scroll_screen():
 	tween.tween_property(self, "position", scroll_to, SCROLL_DURATION)
 	await tween.finished
 	
-	_set_limits(target_origin.x, target_origin.x + CELL_SIZE.x,
-			target_origin.y, target_origin.y + CELL_SIZE.y)
+	limit_rect = Rect2(target_origin, target_origin + CELL_SIZE)
 	
 	set_physics_process(true)
 	target.set_physics_process(true)
 
-func _set_limits(l=-10000000, r=10000000, t=-10000000, b=10000000):
-	limit_left = l
-	limit_right = r
-	limit_top = t
-	limit_bottom = b
+
+func _set_limit_rect(rect):
+	limit_rect = rect
+	
+	limit_left = limit_rect.position.x
+	limit_right = limit_rect.size.x
+	limit_top = limit_rect.position.y - 16
+	limit_bottom = limit_rect.size.y
+	
+	return limit_rect
+
 
 func _get_target_grid_position():
 	return _get_grid_position(target.position.x, target.position.y)
+
 
 func _get_grid_position(x,y):
 	return Vector2(floor(x/CELL_SIZE.x), floor(y/CELL_SIZE.y))
