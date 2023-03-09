@@ -30,6 +30,9 @@ func _ready():
 	sprite.material.shader = SHADER
 	hitbox.connect("body_entered", _on_hitbox_body_entered)
 	hitbox.connect("area_entered", _on_hitbox_area_entered)
+	add_to_group("entity")
+	
+	set_physics_process(false)
 
 
 func _physics_process(delta):

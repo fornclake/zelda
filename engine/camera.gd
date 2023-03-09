@@ -1,3 +1,4 @@
+class_name GridCamera
 extends Camera2D
 
 const DEFAULT_LIMIT_RECT = Rect2(-10000000, -10000000, 10000000, 10000000)
@@ -7,18 +8,26 @@ const SCROLL_DURATION = 0.5
 
 @export var target : Node2D
 
+var grid_position: get = _get_grid_position
 var limit_rect = DEFAULT_LIMIT_RECT: set = _set_limit_rect
 
-@onready var last_grid_position = _get_target_grid_position()
+@onready var last_grid_position = world_to_grid(target.position)
 
+signal scroll_started
+signal scroll_completed
 
 func _ready():
 	var origin = last_grid_position * CELL_SIZE
 	limit_rect = Rect2(origin, origin + CELL_SIZE)
+	
+	await get_tree().physics_frame # takes 2 frames for tilemap entities to initialize
+	await get_tree().physics_frame # make a signal for tilemap ready to await here
+	
+	emit_signal("scroll_completed")
 
 
 func _physics_process(delta):
-	var target_grid_position = _get_target_grid_position()
+	var target_grid_position = world_to_grid(target.position)
 	
 	position = target.position
 	
@@ -29,16 +38,18 @@ func _physics_process(delta):
 
 
 func scroll_screen():
-	var scroll_from = get_screen_center_position()
-	var target_origin = _get_target_grid_position() * CELL_SIZE
+	emit_signal("scroll_started")
 	set_physics_process(false)
-	target.set_physics_process(false)
+	
+	var target_origin = world_to_grid(target.position) * CELL_SIZE
+	var scroll_from = get_screen_center_position()
 	
 	limit_rect = DEFAULT_LIMIT_RECT
 	
 	var scroll_to = target.position
 	var scroll_to_min = target_origin + VIEWPORT_SIZE / 2
 	var scroll_to_max = target_origin + CELL_SIZE - VIEWPORT_SIZE / 2
+	
 	scroll_to.x = clamp(scroll_to.x, scroll_to_min.x, scroll_to_max.x)
 	scroll_to.y = clamp(scroll_to.y, scroll_to_min.y - 16, scroll_to_max.y)
 	
@@ -46,12 +57,16 @@ func scroll_screen():
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", scroll_to, SCROLL_DURATION)
+	
 	await tween.finished
 	
 	limit_rect = Rect2(target_origin, target_origin + CELL_SIZE)
-	
+	emit_signal("scroll_completed")
 	set_physics_process(true)
-	target.set_physics_process(true)
+
+
+func _get_grid_position():
+	return world_to_grid(position)
 
 
 func _set_limit_rect(rect):
@@ -65,9 +80,5 @@ func _set_limit_rect(rect):
 	return limit_rect
 
 
-func _get_target_grid_position():
-	return _get_grid_position(target.position.x, target.position.y)
-
-
-func _get_grid_position(x,y):
-	return Vector2(floor(x/CELL_SIZE.x), floor(y/CELL_SIZE.y))
+func world_to_grid(pos):
+	return Vector2(floor(pos.x/CELL_SIZE.x), floor(pos.y/CELL_SIZE.y))
