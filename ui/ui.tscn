@@ -1,12 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6skg3rcf68dr"]
+[gd_scene load_steps=6 format=3 uid="uid://c6skg3rcf68dr"]
 
+[ext_resource type="Script" path="res://ui/ui.gd" id="1_qd1xq"]
 [ext_resource type="Texture2D" uid="uid://dgc4pukx5qva" path="res://ui/hud.png" id="1_rc7yi"]
 [ext_resource type="Texture2D" uid="uid://bnrjw1taux5vj" path="res://ui/items/sword.png" id="2_6xjjv"]
 [ext_resource type="PackedScene" uid="uid://b7bucb4or4jxc" path="res://ui/hearts.tscn" id="3_kjbde"]
+[ext_resource type="PackedScene" uid="uid://duqfuwxnrcsk6" path="res://ui/inventory/inventory.tscn" id="4_ik5ui"]
 
-[node name="Hud" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer"]
+process_mode = 3
 scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
+script = ExtResource("1_qd1xq")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_rc7yi")
@@ -21,3 +25,7 @@ position = Vector2(104, 0)
 heart_count = 7
 health = 7.0
 metadata/_edit_lock_ = true
+
+[node name="Inventory" parent="." instance=ExtResource("4_ik5ui")]
+process_mode = 2
+visible = false

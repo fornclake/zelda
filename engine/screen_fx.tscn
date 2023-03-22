@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://ylhqnhjf2vwd"]
+
+[ext_resource type="Script" path="res://engine/screen_fx.gd" id="1_6b5lw"]
+
+[sub_resource type="Animation" id="Animation_ffeou"]
+resource_name = "FadeWhiteIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mbopy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_njr5c"]
+resource_name = "FadeWhiteOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m37ma"]
+_data = {
+"FadeWhiteIn": SubResource("Animation_ffeou"),
+"FadeWhiteOut": SubResource("Animation_njr5c"),
+"RESET": SubResource("Animation_mbopy")
+}
+
+[node name="ScreenFX" type="CanvasLayer"]
+process_mode = 3
+layer = 5
+script = ExtResource("1_6b5lw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+speed_scale = 5.0
+libraries = {
+"": SubResource("AnimationLibrary_m37ma")
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_top = 64.0
+offset_right = 640.0
+offset_bottom = 576.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(1, 1, 1, 0)

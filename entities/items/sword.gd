@@ -12,7 +12,6 @@ func activate(u):
 	anim.play(str("Swing", user.sprite_direction))
 
 
-
 func _on_swing_finished():
 	user.current_state = user.state_default
 	queue_free()

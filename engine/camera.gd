@@ -16,6 +16,7 @@ var limit_rect = DEFAULT_LIMIT_RECT: set = _set_limit_rect
 signal scroll_started
 signal scroll_completed
 
+
 func _ready():
 	var origin = last_grid_position * CELL_SIZE
 	limit_rect = Rect2(origin, origin + CELL_SIZE)
@@ -26,7 +27,7 @@ func _ready():
 	emit_signal("scroll_completed")
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var target_grid_position = world_to_grid(target.position)
 	
 	position = target.position

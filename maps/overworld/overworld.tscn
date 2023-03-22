@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://4a64vt5fpfcu"]
+[gd_scene load_steps=20 format=3 uid="uid://yqi7vd6bfdyr"]
 
 [ext_resource type="Texture2D" uid="uid://cxg5v2s4mmbul" path="res://maps/overworld/reference.png" id="1_kj0oq"]
 [ext_resource type="Script" path="res://engine/game.gd" id="1_we2i8"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://gcqmnyx3g1f4" path="res://tilesets/water.png" id="7_il8sr"]
 [ext_resource type="PackedScene" uid="uid://r1bddad85cei" path="res://entities/enemies/blue_octorok.tscn" id="7_nnrvu"]
 [ext_resource type="Texture2D" uid="uid://pl8tnapl6lqq" path="res://tilesets/trees.png" id="8_far4l"]
-[ext_resource type="PackedScene" uid="uid://c6skg3rcf68dr" path="res://ui/hud.tscn" id="8_jj1bb"]
+[ext_resource type="PackedScene" uid="uid://c6skg3rcf68dr" path="res://ui/ui.tscn" id="8_jj1bb"]
 [ext_resource type="Texture2D" uid="uid://b162rcejh7dme" path="res://tilesets/grass.png" id="9_muhl6"]
 [ext_resource type="Texture2D" uid="uid://q0nrsqf3mfio" path="res://tilesets/decor.png" id="10_nx6gd"]
 
@@ -584,9 +584,5 @@ zoom = Vector2(4, 4)
 script = ExtResource("7_4dct5")
 target = NodePath("../Player")
 
-[node name="Hud" parent="." instance=ExtResource("8_jj1bb")]
-
-[node name="Hearts" parent="Hud" index="2"]
-target = NodePath("../../Player")
-
-[editable path="Hud"]
+[node name="UI" parent="." instance=ExtResource("8_jj1bb")]
+target = NodePath("../Player")
