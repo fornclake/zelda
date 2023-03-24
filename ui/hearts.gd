@@ -9,22 +9,27 @@ const ROW_COUNT = 7
 
 var target
 
+
 func initialize(t):
 	target = t
 	_update_hearts()
 	target.connect("on_hit", _update_hearts)
 
+
 func _update_hearts():
 	heart_count = target.hearts
 	health = target.health
+
 
 func _set_heart_count(value):
 	heart_count = value
 	health = value
 
+
 func _set_health(value):
 	health = value
 	queue_redraw()
+
 
 func _draw():
 	for heart in heart_count:

@@ -1,6 +1,8 @@
 extends Entity
 
-var items = [DEF.ITEM.Sword,DEF.ITEM.Sword,DEF.ITEM.Sword]
+var items = {
+	"B": DEF.ITEM.Sword,
+}
 
 var input_direction:
 	get: return Input.get_vector("left", "right", "up", "down")
