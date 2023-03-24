@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Entity
 
-const SWORD = preload("res://entities/items/sword.tscn")
+const SWORD = preload("res://entities/projectiles/sword.tscn")
 const SHADER = preload("res://shaders/entity.gdshader")
 const DEATH_FX = preload("res://effects/enemy_death.tscn")
 
@@ -89,8 +89,8 @@ func set_animation(animation : String):
 	sprite.flip_h = sprite_direction == "Left"
 
 
-func _use_item(item):
-	var instance = item.instantiate()
+func fire_projectile(projectile):
+	var instance = projectile.instantiate()
 	get_parent().add_child(instance)
 	instance.activate(self)
 
@@ -116,7 +116,7 @@ func _on_hitbox_body_entered(body):
 
 func _on_hitbox_area_entered(area):
 	var item = area.get_parent()
-	if item is Item:
+	if item is Projectile:
 		if item.entity_type != entity_type and item.damage > 0:
 			hit(item.damage, item.position)
 

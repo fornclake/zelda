@@ -1,5 +1,5 @@
 extends Node2D
-class_name Item
+class_name Projectile
 
 @export var damage := 0.5
 

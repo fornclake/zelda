@@ -1,4 +1,4 @@
-extends Item
+extends Projectile
 
 @onready var anim = $AnimationPlayer
 

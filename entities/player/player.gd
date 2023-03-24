@@ -1,5 +1,7 @@
 extends Entity
 
+var items = [DEF.ITEM.Sword,DEF.ITEM.Sword,DEF.ITEM.Sword]
+
 var input_direction:
 	get: return Input.get_vector("left", "right", "up", "down")
 
@@ -29,7 +31,7 @@ func state_default():
 		sprite.stop()
 	
 	if Input.is_action_just_pressed("b"):
-		_use_item(SWORD)
+		fire_projectile(SWORD)
 
 
 func state_swing():

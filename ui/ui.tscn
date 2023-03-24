@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6skg3rcf68dr"]
+[gd_scene load_steps=5 format=3 uid="uid://dqisytqml5mpj"]
 
 [ext_resource type="Script" path="res://ui/ui.gd" id="1_qd1xq"]
-[ext_resource type="Texture2D" uid="uid://dgc4pukx5qva" path="res://ui/hud.png" id="1_rc7yi"]
-[ext_resource type="Texture2D" uid="uid://bnrjw1taux5vj" path="res://ui/items/sword.png" id="2_6xjjv"]
-[ext_resource type="PackedScene" uid="uid://b7bucb4or4jxc" path="res://ui/hearts.tscn" id="3_kjbde"]
-[ext_resource type="PackedScene" uid="uid://duqfuwxnrcsk6" path="res://ui/inventory/inventory.tscn" id="4_ik5ui"]
+[ext_resource type="Script" path="res://ui/hud.gd" id="2_tby2c"]
+[ext_resource type="Script" path="res://ui/hearts.gd" id="4_vfsbb"]
+[ext_resource type="Script" path="res://ui/inventory.gd" id="5_hj0il"]
 
 [node name="UI" type="CanvasLayer"]
 process_mode = 3
@@ -12,20 +11,17 @@ scale = Vector2(4, 4)
 transform = Transform2D(4, 0, 0, 4, 0, 0)
 script = ExtResource("1_qd1xq")
 
-[node name="Background" type="Sprite2D" parent="."]
-texture = ExtResource("1_rc7yi")
-centered = false
+[node name="HUD" type="Node2D" parent="."]
+script = ExtResource("2_tby2c")
 
-[node name="B_Item" type="Sprite2D" parent="."]
-position = Vector2(20, 8)
-texture = ExtResource("2_6xjjv")
-
-[node name="Hearts" parent="." instance=ExtResource("3_kjbde")]
+[node name="Hearts" type="Node2D" parent="."]
 position = Vector2(104, 0)
+script = ExtResource("4_vfsbb")
 heart_count = 7
 health = 7.0
-metadata/_edit_lock_ = true
 
-[node name="Inventory" parent="." instance=ExtResource("4_ik5ui")]
+[node name="Inventory" type="Node2D" parent="."]
 process_mode = 2
 visible = false
+position = Vector2(0, 16)
+script = ExtResource("5_hj0il")
