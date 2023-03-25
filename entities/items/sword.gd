@@ -1,6 +1,10 @@
 extends Item
 
-
+const ENTRY = {
+	name = "Sword",
+	icon = preload("res://ui/items/sword.png"),
+	description = "A wooden sword.",
+}
 
 @onready var anim = $AnimationPlayer
 

@@ -30,7 +30,7 @@ func state_wait1():
 	sprite.stop()
 	
 	if state_counter > wait1_time:
-		fire_projectile(ROK)
+		use_item(ROK)
 		change_state(state_wait2)
 
 func state_wait2():

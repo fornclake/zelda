@@ -1,7 +1,7 @@
 extends Entity
 
 var items = {
-	"B": DEF.ITEM.Sword,
+	"B": DEF.ITEM.Sword
 }
 
 var input_direction:
@@ -32,8 +32,10 @@ func state_default():
 		set_animation("Walk")
 		sprite.stop()
 	
-	if Input.is_action_just_pressed("b"):
-		use_item(SWORD)
+	if Input.is_action_just_pressed("b") && items.get("B"):
+		use_item(items["B"].scene)
+	elif Input.is_action_just_pressed("a") && items.get("A"):
+		use_item(items["A"].scene)
 
 
 func state_swing():
