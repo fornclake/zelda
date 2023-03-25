@@ -6,7 +6,7 @@ extends Entity
 
 var move_direction = Vector2.DOWN
 
-const ROK = preload("res://entities/projectiles/rok.tscn")
+const ROK = preload("res://entities/items/rok.tscn")
 
 func state_default():
 	move_direction = _get_random_direction()

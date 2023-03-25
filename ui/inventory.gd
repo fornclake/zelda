@@ -36,18 +36,6 @@ func _process(delta):
 		_swap_item("A", selected_item)
 
 
-func _swap_item(hud,inv):
-	var swap = items.get(hud)
-	items[hud] = items.get(inv)
-	items[inv] = swap
-	
-	if items[inv] == null:
-		items.erase(inv)
-	
-	emit_signal("inventory_changed")
-	queue_redraw()
-
-
 func _draw():
 	draw_texture(BG_TEXTURE, Vector2.ZERO) # draw background
 	
@@ -62,3 +50,15 @@ func _draw():
 	var wrapped = Vector2(selected_item % ROWS, floor(selected_item / COLUMNS))
 	var selector_position = TOP_LEFT + wrapped * ITEM_SIZE + SELECTOR_OFFSET
 	draw_texture(SELECTOR_TEXTURE, selector_position)
+
+
+func _swap_item(hud,inv):
+	var swap = items.get(hud)
+	items[hud] = items.get(inv)
+	items[inv] = swap
+	
+	if items[inv] == null:
+		items.erase(inv)
+	
+	emit_signal("inventory_changed")
+	queue_redraw()

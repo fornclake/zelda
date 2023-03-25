@@ -1,4 +1,4 @@
-extends Projectile
+extends Item
 
 @export var speed = 120
 var velocity := Vector2.ZERO

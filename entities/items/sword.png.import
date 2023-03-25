@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bsdbtm20k5v8k"
-path="res://.godot/imported/rok.png-758402f4994ceac90bf82c65a4613ffd.ctex"
+uid="uid://2h4pfik2ppyl"
+path="res://.godot/imported/sword.png-7f020ea146e17aa9f364331dba11f178.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/projectiles/rok.png"
-dest_files=["res://.godot/imported/rok.png-758402f4994ceac90bf82c65a4613ffd.ctex"]
+source_file="res://entities/items/sword.png"
+dest_files=["res://.godot/imported/sword.png-7f020ea146e17aa9f364331dba11f178.ctex"]
 
 [params]
 

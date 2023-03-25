@@ -33,7 +33,7 @@ func state_default():
 		sprite.stop()
 	
 	if Input.is_action_just_pressed("b"):
-		fire_projectile(SWORD)
+		use_item(SWORD)
 
 
 func state_swing():
