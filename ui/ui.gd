@@ -24,12 +24,14 @@ func _process(_delta):
 
 func _open_inventory():
 	get_tree().paused = true
+	Sound.play(DEF.SFX.PauseMenu_Open)
 	await ScreenFX.fade_white_in()
 	inventory.show()
 	ScreenFX.fade_white_out()
 
 
 func _close_inventory():
+	Sound.play(DEF.SFX.PauseMenu_Close)
 	await ScreenFX.fade_white_in()
 	inventory.hide()
 	await ScreenFX.fade_white_out()

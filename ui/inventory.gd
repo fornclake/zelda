@@ -15,12 +15,15 @@ var items = {}:
 var selected_item = 0:
 	set(value):
 		selected_item = wrapi(value, 0, ROWS * COLUMNS)
+		Sound.play(DEF.SFX.Menu_Cursor)
 		queue_redraw()
 
 signal inventory_changed
 
 
 func _process(delta):
+	if ScreenFX.playing: return
+	
 	if Input.is_action_just_pressed("left"):
 		selected_item -= 1
 	elif Input.is_action_just_pressed("right"):
@@ -56,6 +59,7 @@ func _swap_item(hud,inv):
 	var swap = items.get(hud)
 	items[hud] = items.get(inv)
 	items[inv] = swap
+	Sound.play(DEF.SFX.Menu_Select)
 	
 	if items[inv] == null:
 		items.erase(inv)

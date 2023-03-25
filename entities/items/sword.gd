@@ -16,6 +16,17 @@ func activate(u):
 	position = user.position
 	
 	anim.play(str("Swing", user.sprite_direction))
+	
+	var rng = randi() % 4
+	match rng:
+		0:
+			Sound.play(DEF.SFX.Sword_Slash1)
+		1:
+			Sound.play(DEF.SFX.Sword_Slash2)
+		2:
+			Sound.play(DEF.SFX.Sword_Slash3)
+		3:
+			Sound.play(DEF.SFX.Sword_Slash4)
 
 
 func _on_swing_finished():

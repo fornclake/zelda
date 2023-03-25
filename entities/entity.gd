@@ -12,6 +12,7 @@ const KB_AMT = 75
 @export var hearts : float = 1.0
 @export var speed : float = 70
 @export var damage : float = 0.5
+@export var hit_sfx = preload("res://sfx/LA_Enemy_Hit.wav")
 @onready var health = hearts
 var sprite_direction := "Down"
 
@@ -61,6 +62,7 @@ func state_hurt():
 	
 	if state_counter > KB_TIME:
 		if health <= 0:
+			Sound.play(DEF.SFX.Enemy_Die)
 			var fx = DEATH_FX.instantiate()
 			get_parent().add_child(fx)
 			fx.position = position
@@ -122,6 +124,7 @@ func _on_hitbox_area_entered(area):
 
 
 func hit(amount, pos):
+	Sound.play(hit_sfx)
 	change_state(state_hurt)
 	health -= amount
 	velocity = (position - pos).normalized() * KB_AMT
