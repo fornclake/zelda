@@ -534,6 +534,7 @@ texture = ExtResource("3_w0nsp")
 hframes = 2
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -15)
 scale = Vector2(0.4, 1)
 

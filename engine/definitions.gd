@@ -6,14 +6,16 @@ class ItemEntry:
 	var icon : Texture2D
 	var description : String = "An item"
 	
-	
-	func _init(item : PackedScene):
-		var object = item.instantiate() # maybe we can just read the script
-		scene = item
-		name = object.ENTRY.name
-		icon = object.ENTRY.icon
-		description = object.ENTRY.description
-		object.free()
+	func _init(resource : ItemResource):
+		scene = resource.scene
+		name = resource.name
+		icon = resource.icon
+		description = resource.description
+
+
+var ITEM = {
+	Sword = ItemEntry.new(preload("res://ui/items/sword.tres"))
+}
 
 
 var SFX = {
@@ -29,9 +31,4 @@ var SFX = {
 	Sword_Slash2 = preload("res://sfx/LA_Sword_Slash2.wav"),
 	Sword_Slash3 = preload("res://sfx/LA_Sword_Slash3.wav"),
 	Sword_Slash4 = preload("res://sfx/LA_Sword_Slash4.wav"),
-}
-
-
-var ITEM = {
-	Sword = ItemEntry.new(preload("res://entities/items/sword.tscn"))
 }
