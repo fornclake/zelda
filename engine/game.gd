@@ -4,8 +4,8 @@ extends Node2D
 
 
 func _ready():
-	camera.connect("scroll_started", _on_camera_scroll_started)
-	camera.connect("scroll_completed", _on_camera_scroll_completed)
+	camera.scroll_started.connect(_on_camera_scroll_started)
+	camera.scroll_completed.connect(_on_camera_scroll_completed)
 
 
 func _on_camera_scroll_started():

@@ -16,10 +16,6 @@ class ItemEntry:
 		object.free()
 
 
-var ITEM = {
-	Sword = ItemEntry.new(preload("res://entities/items/sword.tscn"))
-}
-
 var SFX = {
 	Enemy_Die = preload("res://sfx/LA_Enemy_Die.wav"),
 	Enemy_Hit = preload("res://sfx/LA_Enemy_Hit.wav"),
@@ -33,4 +29,9 @@ var SFX = {
 	Sword_Slash2 = preload("res://sfx/LA_Sword_Slash2.wav"),
 	Sword_Slash3 = preload("res://sfx/LA_Sword_Slash3.wav"),
 	Sword_Slash4 = preload("res://sfx/LA_Sword_Slash4.wav"),
+}
+
+
+var ITEM = {
+	Sword = ItemEntry.new(preload("res://entities/items/sword.tscn"))
 }

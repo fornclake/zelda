@@ -8,6 +8,7 @@ const ENTRY = {
 
 @onready var anim = $AnimationPlayer
 
+
 func activate(u):
 	user = u
 	entity_type = user.entity_type
@@ -17,16 +18,13 @@ func activate(u):
 	
 	anim.play(str("Swing", user.sprite_direction))
 	
-	var rng = randi() % 4
-	match rng:
-		0:
-			Sound.play(DEF.SFX.Sword_Slash1)
-		1:
-			Sound.play(DEF.SFX.Sword_Slash2)
-		2:
-			Sound.play(DEF.SFX.Sword_Slash3)
-		3:
-			Sound.play(DEF.SFX.Sword_Slash4)
+	var SOUNDS = [
+		DEF.SFX.Sword_Slash1,
+		DEF.SFX.Sword_Slash2,
+		DEF.SFX.Sword_Slash3,
+		DEF.SFX.Sword_Slash4,
+	]
+	Sound.play(SOUNDS[randi() % SOUNDS.size()])
 
 
 func _on_swing_finished():

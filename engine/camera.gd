@@ -8,7 +8,8 @@ const SCROLL_DURATION = 0.5
 
 @export var target : Node2D
 
-var grid_position: get = _get_grid_position
+var grid_position:
+	get: return world_to_grid(position)
 var limit_rect = DEFAULT_LIMIT_RECT: set = _set_limit_rect
 
 @onready var last_grid_position = world_to_grid(target.position)
@@ -17,6 +18,7 @@ signal scroll_started
 signal scroll_completed
 
 
+# Initialize the camera and set its initial limit_rect
 func _ready():
 	var origin = last_grid_position * CELL_SIZE
 	limit_rect = Rect2(origin, origin + CELL_SIZE)
@@ -27,6 +29,7 @@ func _ready():
 	emit_signal("scroll_completed")
 
 
+# Update the camera's position and scroll if necessary
 func _physics_process(_delta):
 	var target_grid_position = world_to_grid(target.position)
 	
@@ -34,10 +37,10 @@ func _physics_process(_delta):
 	
 	if target_grid_position != last_grid_position:
 		scroll_screen()
-	
-	last_grid_position = target_grid_position
+		last_grid_position = target_grid_position
 
 
+# Scroll the camera smoothly to the new position
 func scroll_screen():
 	emit_signal("scroll_started")
 	set_physics_process(false)
@@ -64,10 +67,6 @@ func scroll_screen():
 	limit_rect = Rect2(target_origin, target_origin + CELL_SIZE)
 	emit_signal("scroll_completed")
 	set_physics_process(true)
-
-
-func _get_grid_position():
-	return world_to_grid(position)
 
 
 func _set_limit_rect(rect):

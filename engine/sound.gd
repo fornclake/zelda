@@ -1,5 +1,6 @@
 extends Node
 
+
 func play(sound):
 	var audio := AudioStreamPlayer.new()
 	audio.stream = sound

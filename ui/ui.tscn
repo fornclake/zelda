@@ -17,8 +17,6 @@ script = ExtResource("2_tby2c")
 [node name="Hearts" type="Node2D" parent="."]
 position = Vector2(104, 0)
 script = ExtResource("4_vfsbb")
-heart_count = 7
-health = 7.0
 
 [node name="Inventory" type="Node2D" parent="."]
 process_mode = 2

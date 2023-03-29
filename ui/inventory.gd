@@ -18,25 +18,18 @@ var selected_item = 0:
 		Sound.play(DEF.SFX.Menu_Cursor)
 		queue_redraw()
 
+var input_direction:
+	get: return Vector2(
+		int(Input.is_action_just_pressed("right")) - int(Input.is_action_just_pressed("left")),
+		int(Input.is_action_just_pressed("down")) - int(Input.is_action_just_pressed("up"))
+	)
+
 signal inventory_changed
 
 
 func _process(delta):
-	if ScreenFX.playing: return
-	
-	if Input.is_action_just_pressed("left"):
-		selected_item -= 1
-	elif Input.is_action_just_pressed("right"):
-		selected_item += 1
-	elif Input.is_action_just_pressed("up"):
-		selected_item -= ROWS
-	elif Input.is_action_just_pressed("down"):
-		selected_item += ROWS
-	
-	if Input.is_action_just_pressed("b"):
-		_swap_item("B", selected_item)
-	if Input.is_action_just_pressed("a"):
-		_swap_item("A", selected_item)
+	if not ScreenFX.playing:
+		_handle_input_actions()
 
 
 func _draw():
@@ -53,6 +46,20 @@ func _draw():
 	var wrapped = Vector2(selected_item % ROWS, floor(selected_item / COLUMNS))
 	var selector_position = TOP_LEFT + wrapped * ITEM_SIZE + SELECTOR_OFFSET
 	draw_texture(SELECTOR_TEXTURE, selector_position)
+
+
+func _handle_input_actions():
+	if input_direction != Vector2.ZERO:
+		_update_selected_item(input_direction)
+	elif Input.is_action_just_pressed("b"):
+		_swap_item("B", selected_item)
+	elif Input.is_action_just_pressed("a"):
+		_swap_item("A", selected_item)
+
+
+func _update_selected_item(input_dir):
+	var item_change = input_dir.x + ROWS * input_dir.y
+	selected_item += item_change
 
 
 func _swap_item(hud,inv):

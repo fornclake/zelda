@@ -7,11 +7,18 @@ extends CanvasLayer
 var items = {}:
 	get: return target.items
 
+var hearts:
+	get: return target.hearts
+
+var health:
+	get: return target.health
+
+
 func _ready():
 	target = get_node(target)
 	
 	inventory.connect("inventory_changed", $HUD.queue_redraw)
-	#inventory.connect("inventory_changed", func(): print(items))
+	target.connect("on_hit", $Hearts.queue_redraw)
 
 
 func _process(_delta):

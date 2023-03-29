@@ -7,6 +7,7 @@ const ITEM_A_POSITION = Vector2(48,0)
 var items = {}:
 	get: return get_parent().items
 
+
 func _draw():
 	draw_texture(HUD_TEXTURE, Vector2.ZERO)
 	
