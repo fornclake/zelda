@@ -1,6 +1,6 @@
 extends Entity
 
-const ROK = preload("res://entities/items/rok.tscn")
+const ROK_PROJECTILE = preload("res://entities/items/rok.tscn")
 
 @export var move_time : float = 1.0
 @export var wait1_time : float = 1.0
@@ -33,7 +33,7 @@ func state_wait1():
 	sprite.stop()
 	
 	if state_counter > wait1_time:
-		use_item(ROK)
+		use_item(ROK_PROJECTILE)
 		change_state(state_wait2)
 
 

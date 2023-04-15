@@ -27,7 +27,7 @@ var input_direction:
 signal inventory_changed
 
 
-func _process(delta):
+func _process(_delta):
 	if not ScreenFX.playing:
 		_handle_input_actions()
 

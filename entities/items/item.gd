@@ -5,3 +5,6 @@ class_name Item
 
 var user : Entity
 var entity_type
+
+func activate(u : Entity):
+	pass
