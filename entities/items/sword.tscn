@@ -541,3 +541,5 @@ scale = Vector2(0.4, 1)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_jkhor")
 metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

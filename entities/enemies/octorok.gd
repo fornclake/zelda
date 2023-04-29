@@ -11,7 +11,7 @@ var move_direction = Vector2.DOWN
 
 func state_default():
 	move_direction = _get_random_direction()
-	change_state(state_move)
+	_change_state(state_move)
 
 
 func state_move():
@@ -22,21 +22,21 @@ func state_move():
 	move_and_slide()
 	
 	_update_sprite_direction(move_direction)
-	set_animation("Walk")
+	_play_animation("Walk")
 	sprite.flip_v = (sprite_direction == "Up")
 	
 	if state_counter > move_time:
-		change_state(state_wait1)
+		_change_state(state_wait1)
 
 
 func state_wait1():
 	sprite.stop()
 	
 	if state_counter > wait1_time:
-		use_item(ROK_PROJECTILE)
-		change_state(state_wait2)
+		_use_item(ROK_PROJECTILE)
+		_change_state(state_wait2)
 
 
 func state_wait2():
 	if state_counter > wait2_time:
-		change_state(state_default)
+		_change_state(state_default)

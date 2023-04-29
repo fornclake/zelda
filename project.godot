@@ -27,10 +27,6 @@ window/size/viewport_width=640
 window/size/viewport_height=576
 window/stretch/mode="viewport"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/tutor/plugin.cfg")
-
 [importer_defaults]
 
 texture={
@@ -98,3 +94,4 @@ pause={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

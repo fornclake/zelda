@@ -27,7 +27,7 @@ var state_counter := 0.0
 signal on_hit
 
 
-func _ready():
+func _ready() -> void:
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = SHADER
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
@@ -37,26 +37,29 @@ func _ready():
 	set_physics_process(false)
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	_state_process(delta)
 
 
-func _state_process(delta):
+# -------------------
+# State machine stuff
+
+func _state_process(delta) -> void:
 	current_state.call()
 	last_state = current_state
 	state_counter += delta
 
 
-func change_state(new_state):
+func _change_state(new_state) -> void:
 	current_state = new_state
 	state_counter = 0
 
 
-func state_default():
+func state_default() -> void:
 	pass
 
 
-func state_hurt():
+func state_hurt() -> void:
 	sprite.material.set_shader_parameter("is_hurt", true)
 	
 	move_and_slide()
@@ -71,10 +74,13 @@ func state_hurt():
 			queue_free()
 		else:
 			sprite.material.set_shader_parameter("is_hurt", false)
-			change_state(state_default)
+			_change_state(state_default)
+
+# -------------------
 
 
-func _update_sprite_direction(vector : Vector2):
+# Sets sprite direction to last orthogonal direction.
+func _update_sprite_direction(vector : Vector2) -> void:
 	if vector == Vector2.LEFT:
 		sprite_direction = "Left"
 	elif vector == Vector2.RIGHT:
@@ -85,37 +91,43 @@ func _update_sprite_direction(vector : Vector2):
 		sprite_direction = "Down"
 
 
-func set_animation(animation : String):
+# Plays an animation from a directioned set.
+func _play_animation(animation : String) -> void:
 	var direction = "Side" if sprite_direction in ["Left", "Right"] else sprite_direction
 	sprite.play(animation + direction)
 	sprite.flip_h = sprite_direction == "Left"
 
 
-func use_item(item):
+# Instances item and passes self as its user.
+func _use_item(item) -> void:
 	var instance = item.instantiate()
 	get_parent().add_child(instance)
 	instance.activate(self)
 
 
-func _get_random_direction():
+# Returns a random orthogonal direction.
+static func _get_random_direction() -> Vector2:
 	var directions = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 	return directions[randi() % directions.size()]
 
 
-func _on_hitbox_body_entered(body):
+# Get hit by entities of different type
+func _on_hitbox_body_entered(body) -> void:
 	if body is Entity and body.entity_type != entity_type and body.damage > 0:
 		hit(body.damage, body.position)
 
 
-func _on_hitbox_area_entered(area):
+# Get hit by opposing items
+func _on_hitbox_area_entered(area) -> void:
 	var item = area.get_parent()
 	if item is Item and item.entity_type != entity_type and item.damage > 0:
 		hit(item.damage, item.position)
 
 
-func hit(amount, pos):
+# Setup hit state and switch
+func hit(amount, pos) -> void:
 	Sound.play(hit_sfx)
-	change_state(state_hurt)
+	_change_state(state_hurt)
 	health -= amount
 	velocity = (position - pos).normalized() * KB_AMT
 	emit_signal("on_hit")
