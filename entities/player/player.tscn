@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dtrlj82v8h6ru"]
+[gd_scene load_steps=27 format=3 uid="uid://dtrlj82v8h6ru"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_4v2fk"]
 [ext_resource type="Texture2D" uid="uid://bw2oehx1j7o4i" path="res://entities/player/link.png" id="1_w4kfg"]
@@ -27,6 +27,14 @@ region = Rect2(64, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7wrjf"]
 atlas = ExtResource("1_w4kfg")
 region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kai5"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(0, 96, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr8pq"]
+atlas = ExtResource("1_w4kfg")
+region = Rect2(16, 96, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_12lrg"]
 atlas = ExtResource("1_w4kfg")
@@ -109,6 +117,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"PushUp",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3kai5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lr8pq")
+}],
+"loop": true,
+"name": &"SwimDown",
 "speed": 10.0
 }, {
 "frames": [{
@@ -219,3 +238,8 @@ visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_hmn57")
+
+[node name="WaterDetect" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0)
+collision_mask = 2
+hit_from_inside = true

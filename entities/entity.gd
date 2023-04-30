@@ -21,8 +21,8 @@ var current_state = state_default
 var last_state = state_default
 var state_counter := 0.0
 
-@onready var sprite = $AnimatedSprite2D
-@onready var hitbox = $Hitbox
+@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var hitbox : Area2D = $Hitbox
 
 signal on_hit
 

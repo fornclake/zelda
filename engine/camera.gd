@@ -26,6 +26,9 @@ func _ready():
 	await get_tree().physics_frame # takes 2 frames for tilemap entities to initialize
 	await get_tree().physics_frame # make a signal for tilemap ready to await here
 	
+	if target.has_method("_on_scroll_completed"):
+		scroll_completed.connect(target._on_scroll_completed)
+	
 	emit_signal("scroll_completed")
 
 
