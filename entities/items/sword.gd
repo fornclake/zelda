@@ -53,3 +53,4 @@ func _on_hitbox_body_entered(body):
 				body.add_child(effect)
 				effect.position = body.map_to_local(cell)
 				body.erase_cell(2, cell)
+				Sound.play(DEF.SFX.Bush_Cut)

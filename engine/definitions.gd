@@ -31,4 +31,7 @@ var SFX = {
 	Sword_Slash2 = preload("res://sfx/LA_Sword_Slash2.wav"),
 	Sword_Slash3 = preload("res://sfx/LA_Sword_Slash3.wav"),
 	Sword_Slash4 = preload("res://sfx/LA_Sword_Slash4.wav"),
+	Bush_Cut = preload("res://sfx/LA_Bush_Cut.wav"),
+	Wade1 = preload("res://sfx/LA_Link_Wade1.wav"),
+	Wade2 = preload("res://sfx/LA_Link_Wade2.wav"),
 }

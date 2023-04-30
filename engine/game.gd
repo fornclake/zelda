@@ -11,6 +11,7 @@ func _ready():
 func _on_camera_scroll_started():
 	for entity in get_tree().get_nodes_in_group("entity"):
 		entity.set_physics_process(false)
+		entity.sprite.stop()
 
 
 func _on_camera_scroll_completed():
