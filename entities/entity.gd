@@ -19,7 +19,7 @@ var sprite_direction := "Down"
 
 var current_state = state_default
 var last_state = state_default
-var state_counter := 0.0
+var elapsed_state_time := 0.0
 
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox : Area2D = $Hitbox
@@ -47,12 +47,12 @@ func _physics_process(delta) -> void:
 func _state_process(delta) -> void:
 	current_state.call()
 	last_state = current_state
-	state_counter += delta
+	elapsed_state_time += delta
 
 
 func _change_state(new_state) -> void:
+	elapsed_state_time = 0
 	current_state = new_state
-	state_counter = 0
 
 
 func state_default() -> void:
@@ -61,17 +61,11 @@ func state_default() -> void:
 
 func state_hurt() -> void:
 	sprite.material.set_shader_parameter("is_hurt", true)
-	
 	move_and_slide()
 	
-	if state_counter > KB_TIME:
+	if elapsed_state_time > KB_TIME:
 		if health <= 0:
-			var fx = DEATH_FX.instantiate()
-			get_parent().add_child(fx)
-			fx.position = position
-			fx.play()
-			Sound.play(DEF.SFX.Enemy_Die)
-			queue_free()
+			_die()
 		else:
 			sprite.material.set_shader_parameter("is_hurt", false)
 			_change_state(state_default)
@@ -96,6 +90,16 @@ func _play_animation(animation : String) -> void:
 	var direction = "Side" if sprite_direction in ["Left", "Right"] else sprite_direction
 	sprite.play(animation + direction)
 	sprite.flip_h = sprite_direction == "Left"
+
+
+func _die() -> void:
+	var death_fx = DEATH_FX.instantiate()
+	get_parent().add_child(death_fx)
+	death_fx.position = position
+	
+	death_fx.play()
+	Sound.play(DEF.SFX.Enemy_Die)
+	queue_free()
 
 
 # Instances item and passes self as its user.

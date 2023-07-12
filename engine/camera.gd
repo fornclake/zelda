@@ -19,7 +19,7 @@ signal scroll_completed
 
 
 # Initialize the camera and set its initial limit_rect
-func _ready():
+func _ready() -> void:
 	var origin = last_grid_position * CELL_SIZE
 	limit_rect = Rect2(origin, origin + CELL_SIZE)
 	
@@ -33,7 +33,7 @@ func _ready():
 
 
 # Update the camera's position and scroll if necessary
-func _physics_process(_delta):
+func _physics_process(_delta) -> void:
 	var target_grid_position = world_to_grid(target.position)
 	
 	position = target.position
@@ -44,7 +44,7 @@ func _physics_process(_delta):
 
 
 # Scroll the camera smoothly to the new position
-func scroll_screen():
+func scroll_screen() -> void:
 	emit_signal("scroll_started")
 	set_physics_process(false)
 	
@@ -57,22 +57,21 @@ func scroll_screen():
 	var scroll_to_min = target_origin + VIEWPORT_SIZE / 2
 	var scroll_to_max = target_origin + CELL_SIZE - VIEWPORT_SIZE / 2
 	
+	position = scroll_from
 	scroll_to.x = clamp(scroll_to.x, scroll_to_min.x, scroll_to_max.x)
 	scroll_to.y = clamp(scroll_to.y, scroll_to_min.y - 16, scroll_to_max.y)
 	
-	position = scroll_from
-	
 	var tween = create_tween()
 	tween.tween_property(self, "position", scroll_to, SCROLL_DURATION)
-	
 	await tween.finished
 	
 	limit_rect = Rect2(target_origin, target_origin + CELL_SIZE)
+	
 	emit_signal("scroll_completed")
 	set_physics_process(true)
 
 
-func _set_limit_rect(rect):
+func _set_limit_rect(rect) -> Rect2:
 	limit_rect = rect
 	
 	limit_left = limit_rect.position.x
@@ -83,5 +82,5 @@ func _set_limit_rect(rect):
 	return limit_rect
 
 
-func world_to_grid(pos):
+func world_to_grid(pos) -> Vector2:
 	return Vector2(floor(pos.x/CELL_SIZE.x), floor(pos.y/CELL_SIZE.y))

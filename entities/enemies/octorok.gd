@@ -25,18 +25,18 @@ func state_move():
 	_play_animation("Walk")
 	sprite.flip_v = (sprite_direction == "Up")
 	
-	if state_counter > move_time:
+	if elapsed_state_time > move_time:
 		_change_state(state_wait1)
 
 
 func state_wait1():
 	sprite.stop()
 	
-	if state_counter > wait1_time:
+	if elapsed_state_time > wait1_time:
 		_use_item(ROK_PROJECTILE)
 		_change_state(state_wait2)
 
 
 func state_wait2():
-	if state_counter > wait2_time:
+	if elapsed_state_time > wait2_time:
 		_change_state(state_default)

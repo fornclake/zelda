@@ -524,7 +524,7 @@ libraries = {
 visible = false
 texture = ExtResource("2_wgyy5")
 hframes = 6
-vframes = 6
+vframes = 7
 frame = 26
 metadata/_edit_lock_ = true
 
