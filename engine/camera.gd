@@ -35,7 +35,6 @@ func _ready() -> void:
 # Update the camera's position and scroll if necessary
 func _physics_process(_delta) -> void:
 	var target_grid_position = world_to_grid(target.position)
-	
 	position = target.position
 	
 	if target_grid_position != last_grid_position:

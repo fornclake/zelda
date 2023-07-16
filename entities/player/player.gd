@@ -25,7 +25,6 @@ func _physics_process(delta) -> void:
 func state_default() -> void:
 	velocity = input_direction * speed
 	move_and_slide()
-	
 	_update_sprite_direction(input_direction)
 	
 	# Handle animations
@@ -59,9 +58,7 @@ func state_drown() -> void:
 		Sound.play(DEF.SFX.Wade1)
 		drown_instantiated = false
 		sprite.animation = "SwimDown"
-
-	
-	sprite.frame = 1
+		sprite.stop()
 	
 	# Show drown effect. Instance frees itself
 	if elapsed_state_time > 0.25 && not drown_instantiated:
