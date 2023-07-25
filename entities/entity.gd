@@ -1,3 +1,4 @@
+@icon("res://core/svg/Entity.svg")
 extends CharacterBody2D
 class_name Entity
 
@@ -34,7 +35,7 @@ func _ready() -> void:
 	hitbox.area_entered.connect(_on_hitbox_area_entered)
 	add_to_group("entity")
 	
-	set_physics_process(false)
+	#set_physics_process(false)
 
 
 func _physics_process(delta) -> void:
@@ -134,4 +135,4 @@ func hit(amount, pos) -> void:
 	_change_state(state_hurt)
 	health -= amount
 	velocity = (position - pos).normalized() * KB_AMT
-	emit_signal("on_hit")
+	emit_signal("on_hit", health)

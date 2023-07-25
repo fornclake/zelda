@@ -9,8 +9,7 @@ const SELECTOR_OFFSET = Vector2(-2, 1)
 const BG_TEXTURE = preload("res://ui/inventory.png")
 const SELECTOR_TEXTURE = preload("res://ui/selector.png")
 
-var items = {}:
-	get: return get_parent().items
+var items := {}
 
 var selected_item = 0:
 	set(value):
@@ -24,7 +23,7 @@ var input_direction:
 		int(Input.is_action_just_pressed("down")) - int(Input.is_action_just_pressed("up"))
 	)
 
-signal inventory_changed
+signal inventory_changed(items)
 
 
 func _process(_delta):
@@ -71,5 +70,5 @@ func _swap_item(hud,inv):
 	if items[inv] == null:
 		items.erase(inv)
 	
-	emit_signal("inventory_changed")
+	emit_signal("inventory_changed", items)
 	queue_redraw()

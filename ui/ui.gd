@@ -2,23 +2,15 @@ extends CanvasLayer
 
 @export_node_path("Entity") var target
 
+@onready var hud = $HUD
+@onready var hearts = $HUD/Hearts
 @onready var inventory = $Inventory
-
-var items = {}:
-	get: return target.items
-
-var hearts:
-	get: return target.hearts
-
-var health:
-	get: return target.health
-
 
 func _ready():
 	target = get_node(target)
-	
-	inventory.connect("inventory_changed", $HUD.queue_redraw)
-	target.connect("on_hit", $Hearts.queue_redraw)
+	_inventory_changed(target.items)
+	inventory.connect("inventory_changed", _inventory_changed)
+	target.connect("on_hit", _target_on_hit)
 
 
 func _process(_delta):
@@ -27,6 +19,17 @@ func _process(_delta):
 			_close_inventory()
 		else:
 			_open_inventory()
+
+
+func _target_on_hit(new_health):
+	hearts.health = new_health
+
+
+func _inventory_changed(new_items):
+	inventory.items = new_items # redundant
+	target.items = new_items
+	hud.items = new_items
+	hud.queue_redraw()
 
 
 func _open_inventory():

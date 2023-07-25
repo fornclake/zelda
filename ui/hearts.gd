@@ -4,12 +4,8 @@ const HEART_TEXTURE = preload("res://ui/hearts.png")
 const HEART_SIZE = Vector2(8,8)
 const ROW_COUNT = 7
 
-var hearts:
-	get: return get_parent().hearts
-
-var health:
-	get: return get_parent().health
-
+var hearts := 3
+var health := 3
 
 func _draw():
 	for heart in int(hearts):

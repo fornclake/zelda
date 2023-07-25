@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cixdkvuny82l3"
-path="res://.godot/imported/EditTerrain.svg-f7ee950d68a391de33e4e8ddd76bf2ac.ctex"
+uid="uid://c3im42l15w22b"
+path="res://.godot/imported/Entity.svg-6f6f93578a843ab83f45ba348274c7af.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/better-terrain/icons/EditTerrain.svg"
-dest_files=["res://.godot/imported/EditTerrain.svg-f7ee950d68a391de33e4e8ddd76bf2ac.ctex"]
+source_file="res://core/svg/Entity.svg"
+dest_files=["res://.godot/imported/Entity.svg-6f6f93578a843ab83f45ba348274c7af.ctex"]
 
 [params]
 
