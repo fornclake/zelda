@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="Zelda"
-run/main_scene="res://maps/overworld.tscn"
+run/main_scene="res://data/maps/overworld.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-ScreenFX="*res://engine/screen_fx.tscn"
-Sound="*res://engine/sound.gd"
-DEF="*res://engine/definitions.gd"
+ScreenFX="*res://core/vfx/screen_fx.tscn"
+Sound="*res://core/sound.gd"
+DEF="*res://data/definitions.gd"
 
 [display]
 
