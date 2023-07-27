@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://core/item_resource.gd" id="1_lp67i"]
 [ext_resource type="Texture2D" uid="uid://bnrjw1taux5vj" path="res://core/ui/items/sword.png" id="1_u0fte"]
-[ext_resource type="PackedScene" uid="uid://dhsyuyst7ybd6" path="res://data/actors/attacks/sword.tscn" id="2_chq18"]
+[ext_resource type="PackedScene" uid="uid://dhsyuyst7ybd6" path="res://data/actors/attacks/sword.tscn" id="2_0moxg"]
 
 [resource]
 script = ExtResource("1_lp67i")
-scene = ExtResource("2_chq18")
+scene = ExtResource("2_0moxg")
 name = "Sword"
 icon = ExtResource("1_u0fte")
 description = "A wooden sword."

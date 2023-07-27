@@ -1,8 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://dtrlj82v8h6ru"]
+[gd_scene load_steps=27 format=3 uid="uid://dtrlj82v8h6ru"]
 
 [ext_resource type="Script" path="res://data/actors/player/player.gd" id="1_4v2fk"]
 [ext_resource type="Texture2D" uid="uid://bw2oehx1j7o4i" path="res://data/actors/player/link.png" id="1_w4kfg"]
 [ext_resource type="AudioStream" uid="uid://445ntodo4dfy" path="res://data/sfx/LA_Link_Hurt.wav" id="2_kislt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o8w3q"]
+radius = 5.0
+height = 12.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_haewf"]
 atlas = ExtResource("1_w4kfg")
@@ -213,32 +217,25 @@ height = 12.0
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_4v2fk")
-entity_type = 1
-hearts = 7.0
+actor_type = 1
 speed = 60.0
+hearts = 7.0
 damage = 0.0
 hit_sfx = ExtResource("2_kislt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_o8w3q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ties8")
 animation = &"WalkDown"
 autoplay = "WalkDown"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("CapsuleShape2D_q8082")
-
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 visible = false
 shape = SubResource("CapsuleShape2D_q8082")
-
-[node name="WaterDetect" type="RayCast2D" parent="."]
-visible = false
-target_position = Vector2(0, 0)
-collision_mask = 2
-hit_from_inside = true
 
 [node name="PushRay" type="RayCast2D" parent="."]
 visible = false

@@ -9,12 +9,12 @@ const ROK_PROJECTILE = preload("res://data/actors/attacks/rok.tscn")
 var move_direction = Vector2.DOWN
 
 
-func state_default():
+func state_default() -> void:
 	move_direction = _get_random_direction()
 	_change_state(state_move)
 
 
-func state_move():
+func state_move() -> void:
 	if is_on_wall():
 		move_direction = -move_direction
 	
@@ -29,7 +29,7 @@ func state_move():
 		_change_state(state_wait1)
 
 
-func state_wait1():
+func state_wait1() -> void:
 	sprite.stop()
 	
 	if elapsed_state_time > wait1_time:
@@ -37,6 +37,6 @@ func state_wait1():
 		_change_state(state_wait2)
 
 
-func state_wait2():
+func state_wait2() -> void:
 	if elapsed_state_time > wait2_time:
 		_change_state(state_default)

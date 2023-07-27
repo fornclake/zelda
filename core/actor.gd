@@ -1,37 +1,45 @@
-@icon("res://core/svg/Actor.svg")
+@icon("res://editor/svg/Actor.svg")
 class_name Actor extends CharacterBody2D
 
 const SWORD = preload("res://data/actors/attacks/sword.tscn")
 const SHADER = preload("res://data/vfx/actor.gdshader")
 const DEATH_FX = preload("res://data/vfx/enemy_death.tscn")
-
 const KB_TIME = 0.2
 const KB_AMT = 100
 
 @export_enum("Enemy", "Player") var actor_type
-@export var hearts : float = 1.0
 @export var speed : float = 70
-@export var damage : float = 0.5
+@export var hearts := 1.0
+@export var damage := 0.5
 @export var hit_sfx = preload("res://data/sfx/LA_Enemy_Hit.wav")
 @onready var health = hearts
-
-var sprite_direction := "Down"
 
 var current_state = state_default
 var last_state = state_default
 var elapsed_state_time := 0.0
+var sprite_direction := "Down"
 
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox : Area2D = $Hitbox
+var point : RayCast2D
 
 signal on_hit
 
-
 func _ready() -> void:
+	set_collision_layer_value(1, false)
+	set_collision_layer_value(2, true)
+	
+	point = RayCast2D.new()
+	add_child(point)
+	point.set_collision_mask_value(1, false) # does not collide with solids
+	point.set_collision_mask_value(2, true) # collides with entities
+	
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = SHADER
+	
 	hitbox.body_entered.connect(_on_hitbox_body_entered)
 	hitbox.area_entered.connect(_on_hitbox_area_entered)
+	
 	add_to_group("actor")
 	
 	#set_physics_process(false)
@@ -69,6 +77,10 @@ func state_hurt() -> void:
 		else:
 			sprite.material.set_shader_parameter("is_hurt", false)
 			_change_state(state_default)
+
+
+func state_drown() -> void:
+	_die()
 
 # -------------------
 
@@ -115,6 +127,13 @@ static func _get_random_direction() -> Vector2:
 	return directions[randi() % directions.size()]
 
 
+func _check_collisions():
+	if point.is_colliding():
+		var other = point.get_collider()
+		if other is Map:
+			other.tile_call(self)
+
+
 # Get hit by entities of different type
 func _on_hitbox_body_entered(body) -> void:
 	if body is Actor and body.actor_type != actor_type and body.damage > 0:
@@ -135,3 +154,7 @@ func hit(amount, pos) -> void:
 	health -= amount
 	velocity = (position - pos).normalized() * KB_AMT
 	emit_signal("on_hit", health)
+
+
+func drown() -> void:
+	_change_state(state_drown)

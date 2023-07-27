@@ -10,6 +10,7 @@ var health := 3
 func _draw():
 	for heart in int(hearts):
 		var offset_x = (heart % ROW_COUNT) * HEART_SIZE.x
+		@warning_ignore("integer_division")
 		var offset_y = floor(heart / ROW_COUNT) * HEART_SIZE.y
 		var fraction = (health - floor(health)) * 4
 		var src_rect = Rect2(fraction * 8,0,8,8)

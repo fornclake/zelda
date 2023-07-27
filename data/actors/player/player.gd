@@ -11,7 +11,6 @@ var last_safe_position : Vector2
 var drown_instantiated := false
 
 @onready var push = $PushRay
-@onready var water_detect = $WaterDetect
 
 
 func _physics_process(delta) -> void:
@@ -25,6 +24,7 @@ func _physics_process(delta) -> void:
 func state_default() -> void:
 	velocity = input_direction * speed
 	move_and_slide()
+	_check_collisions()
 	_update_sprite_direction(input_direction)
 	
 	# Handle animations
@@ -42,10 +42,6 @@ func state_default() -> void:
 		_use_item(items["B"].scene)
 	elif Input.is_action_just_pressed("a") && items.get("A"):
 		_use_item(items["A"].scene)
-	
-	# State changes
-	if water_detect.is_colliding():
-		_change_state(state_drown)
 
 
 func state_swing() -> void:
@@ -62,8 +58,8 @@ func state_drown() -> void:
 	
 	# Show drown effect. Instance frees itself
 	if elapsed_state_time > 0.25 && not drown_instantiated:
-		var drown = preload("res://data/vfx/drown.tscn").instantiate()
-		add_child(drown)
+		var drown_fx = preload("res://data/vfx/drown.tscn").instantiate()
+		add_child(drown_fx)
 		sprite.hide()
 		drown_instantiated = true
 	

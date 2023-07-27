@@ -44,6 +44,6 @@ func _on_swing_finished() -> void:
 
 
 func _on_hitbox_body_entered(body) -> void:
-	if body is TileMap:
+	if body is Map:
 		var cell = body.local_to_map(target_cell_position)
 		body.slash(cell)

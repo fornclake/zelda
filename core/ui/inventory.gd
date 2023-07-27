@@ -42,6 +42,7 @@ func _draw():
 		draw_texture(items[i].icon, Vector2(x,y))
 	
 	# draw selection cursor
+	@warning_ignore("integer_division")
 	var wrapped = Vector2(selected_item % ROWS, floor(selected_item / COLUMNS))
 	var selector_position = TOP_LEFT + wrapped * ITEM_SIZE + SELECTOR_OFFSET
 	draw_texture(SELECTOR_TEXTURE, selector_position)

@@ -5,5 +5,6 @@ class_name Attack extends Node2D
 var user : Actor
 var actor_type
 
+@warning_ignore("unused_parameter")
 func activate(u : Actor):
 	pass

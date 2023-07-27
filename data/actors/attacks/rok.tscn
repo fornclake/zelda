@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://b1tgc3wclg81f"]
 
 [ext_resource type="Texture2D" uid="uid://bsdbtm20k5v8k" path="res://data/actors/attacks/rok.png" id="1_owenn"]
 [ext_resource type="Script" path="res://data/actors/attacks/rok.gd" id="1_tb4up"]
