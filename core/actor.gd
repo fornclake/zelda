@@ -1,14 +1,15 @@
 @icon("res://editor/svg/Actor.svg")
 class_name Actor extends CharacterBody2D
 
-const SWORD = preload("res://data/actors/attacks/sword.tscn")
-const SHADER = preload("res://data/vfx/actor.gdshader")
-const DEATH_FX = preload("res://data/vfx/enemy_death.tscn")
-const KB_TIME = 0.2
-const KB_AMT = 100
+static var SHADER = preload("res://data/vfx/actor.gdshader")
+static var DEATH_FX = preload("res://data/vfx/enemy_death.tres")
+static var DROWN_SFX = preload("res://data/sfx/LA_Link_Wade1.wav")
+static var DROWN_VFX = preload("res://data/vfx/drown.tres")
+static var KB_TIME = 0.2
+static var KB_AMT = 100
 
 @export_enum("Enemy", "Player") var actor_type
-@export var speed : float = 70
+@export var speed := 70.0
 @export var hearts := 1.0
 @export var damage := 0.5
 @export var hit_sfx = preload("res://data/sfx/LA_Enemy_Hit.wav")
@@ -20,8 +21,8 @@ var elapsed_state_time := 0.0
 var sprite_direction := "Down"
 
 @onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
-@onready var hitbox : Area2D = $Hitbox
-var point : RayCast2D
+@onready var collision : CollisionShape2D = $CollisionShape2D
+var ray : RayCast2D
 
 signal on_hit
 
@@ -29,16 +30,15 @@ func _ready() -> void:
 	set_collision_layer_value(1, false)
 	set_collision_layer_value(2, true)
 	
-	point = RayCast2D.new()
-	add_child(point)
-	point.set_collision_mask_value(1, false) # does not collide with solids
-	point.set_collision_mask_value(2, true) # collides with entities
+	ray = RayCast2D.new()
+	add_child(ray)
+	ray.target_position = Vector2.ZERO
+	ray.set_collision_mask_value(2, true) # collides with entities
+	ray.hit_from_inside = true
+	ray.collide_with_areas = true
 	
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = SHADER
-	
-	hitbox.body_entered.connect(_on_hitbox_body_entered)
-	hitbox.area_entered.connect(_on_hitbox_area_entered)
 	
 	add_to_group("actor")
 	
@@ -80,9 +80,15 @@ func state_hurt() -> void:
 
 
 func state_drown() -> void:
-	_die()
+	Sound.play(DROWN_SFX)
+	_oneshot_vfx(DROWN_VFX)
+	queue_free()
 
 # -------------------
+
+
+func _snap_position() -> void:
+	position = position.snapped(Vector2.ONE)
 
 
 # Sets sprite direction to last orthogonal direction.
@@ -105,12 +111,8 @@ func _play_animation(animation : String) -> void:
 
 
 func _die() -> void:
-	var death_fx = DEATH_FX.instantiate()
-	get_parent().add_child(death_fx)
-	death_fx.position = position
-	
-	death_fx.play()
 	Sound.play(preload("res://data/sfx/LA_Enemy_Die.wav"))
+	_oneshot_vfx(DEATH_FX)
 	queue_free()
 
 
@@ -122,38 +124,50 @@ func _use_item(item) -> void:
 
 
 # Returns a random orthogonal direction.
-static func _get_random_direction() -> Vector2:
+func _get_random_direction() -> Vector2:
 	var directions = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN]
 	return directions[randi() % directions.size()]
 
 
 func _check_collisions():
-	if point.is_colliding():
-		var other = point.get_collider()
+	# Update raycast direction when moving
+	if velocity:
+		var direction = velocity.normalized()
+		ray.position = direction * -2
+		ray.target_position = direction * 12
+		
+		if direction.x != 0 and collision.position.x != direction.x and not test_move(transform, Vector2(direction.x, 0)):
+			collision.position.x = direction.x
+		if direction.y != 0 and collision.position.y != direction.y and not test_move(transform, Vector2(0, direction.y)):
+			collision.position.y = direction.y
+	
+	if ray.is_colliding():
+		var other = ray.get_collider()
 		if other is Map:
-			other.tile_call(self)
+			var on_step = other.on_step(self)
+			if has_method(on_step):
+				call(on_step)
+		elif other is Actor or other is Attack:
+			if other.actor_type != actor_type and other.damage > 0:
+				hit(other.damage, other.position)
 
 
-# Get hit by entities of different type
-func _on_hitbox_body_entered(body) -> void:
-	if body is Actor and body.actor_type != actor_type and body.damage > 0:
-		hit(body.damage, body.position)
-
-
-# Get hit by opposing attacks
-func _on_hitbox_area_entered(area) -> void:
-	var attack = area.get_parent()
-	if attack is Attack and attack.actor_type != actor_type and attack.damage > 0:
-		hit(attack.damage, attack.position)
+func _oneshot_vfx(frames : SpriteFrames) -> void:
+	var new_fx = AnimatedSprite2D.new()
+	new_fx.animation_finished.connect(new_fx.queue_free)
+	new_fx.position = position
+	new_fx.sprite_frames = frames
+	get_parent().add_child(new_fx)
+	new_fx.play()
 
 
 # Setup hit state and switch
 func hit(amount, pos) -> void:
-	Sound.play(hit_sfx)
-	_change_state(state_hurt)
 	health -= amount
 	velocity = (position - pos).normalized() * KB_AMT
+	Sound.play(hit_sfx)
 	emit_signal("on_hit", health)
+	_change_state(state_hurt)
 
 
 func drown() -> void:

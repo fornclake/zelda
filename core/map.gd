@@ -1,13 +1,11 @@
 @icon("res://editor/svg/Map.svg")
 class_name Map extends TileMap
 
-
-func tile_call(actor : Actor):
+func on_step(actor : Actor) -> String:
 	var data = get_cell_tile_data(1, local_to_map(actor.position))
 	if data:
-		var function = data.get_custom_data("call_on_step")
-		if actor.has_method(function):
-			actor.call(function)
+		return data.get_custom_data("on_step")
+	return ""
 
 
 func slash(cell : Vector2i) -> void:

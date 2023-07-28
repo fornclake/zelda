@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cjb7is1lieu4j"]
 
-[ext_resource type="Texture2D" uid="uid://c1wx4yysldr80" path="res://data/maps/tilesets/overworld.png" id="1_m8un1"]
+[ext_resource type="Texture2D" uid="uid://c1wx4yysldr80" path="res://data/maps/overworld.png" id="1_5wh62"]
 [ext_resource type="Script" path="res://core/map.gd" id="2_corn8"]
 [ext_resource type="PackedScene" uid="uid://dtrlj82v8h6ru" path="res://data/actors/player/player.tscn" id="2_kp7or"]
 [ext_resource type="PackedScene" uid="uid://tcebs4gssy5f" path="res://core/ui/ui.tscn" id="3_86d2a"]
@@ -8,7 +8,7 @@
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ecyxb"]
 resource_name = "Overworld"
-texture = ExtResource("1_m8un1")
+texture = ExtResource("1_5wh62")
 0:0/0 = 0
 0:0/0/terrain_set = 0
 0:0/0/terrain = 0
@@ -744,6 +744,7 @@ texture = ExtResource("1_m8un1")
 6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:1/0/physics_layer_1/linear_velocity = Vector2(0, 0)
 6:1/0/physics_layer_1/angular_velocity = 0.0
+6:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 6:1/0/custom_data_0 = true
 5:2/0 = 0
 5:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -1547,7 +1548,7 @@ terrain_set_0/terrain_4/name = "Gravel"
 terrain_set_0/terrain_4/color = Color(0.458824, 0.454902, 0.129412, 1)
 custom_data_layer_0/name = "is_cuttable"
 custom_data_layer_0/type = 1
-custom_data_layer_1/name = "call_on_step"
+custom_data_layer_1/name = "on_step"
 custom_data_layer_1/type = 4
 sources/0 = SubResource("TileSetAtlasSource_ecyxb")
 
@@ -1555,7 +1556,7 @@ sources/0 = SubResource("TileSetAtlasSource_ecyxb")
 tile_set = SubResource("TileSet_pcakb")
 format = 2
 layer_0/name = "Dynamic"
-layer_0/tile_data = PackedInt32Array(5374035, 393216, 1, 5242968, 393216, 1, 5374040, 393216, 1, 5505112, 393216, 1, 5439578, 393216, 1, 5308506, 393216, 1, 5242972, 393216, 1, 5374044, 393216, 1, 5505116, 393216, 1, 5374050, 393216, 1, 5374053, 393216, 1, 5242984, 393216, 1, 5308522, 393216, 1, 5374056, 393216, 1, 5505128, 393216, 1, 5439594, 393216, 1, 4522101, 393216, 1, 4522099, 393216, 1, 4653171, 393216, 1, 4784243, 393216, 1, 4784245, 393216, 1, 4653173, 393216, 1, 4522108, 393216, 1, 4653180, 393216, 1, 4784252, 393216, 1)
+layer_0/tile_data = PackedInt32Array(5374035, 393216, 1, 5242968, 393216, 1, 5374040, 393216, 1, 5505112, 393216, 1, 5439578, 393216, 1, 5308506, 393216, 1, 5242972, 393216, 1, 5374044, 393216, 1, 5505116, 393216, 1, 5374050, 393216, 1, 5374053, 393216, 1, 5242984, 393216, 1, 5308522, 393216, 1, 5374056, 393216, 1, 5505128, 393216, 1, 5439594, 393216, 1, 4522101, 393216, 1, 4522099, 393216, 1, 4653171, 393216, 1, 4784243, 393216, 1, 4784245, 393216, 1, 4653173, 393216, 1, 4522108, 393216, 1, 4653180, 393216, 1, 4784252, 393216, 1, 5243012, 65536, 2)
 layer_1/name = "Static"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
@@ -1574,7 +1575,7 @@ metadata/terrain_autotiler = {
 }
 
 [node name="Player" parent="." instance=ExtResource("2_kp7or")]
-position = Vector2(2419, 1111)
+position = Vector2(1916, 1151)
 
 [node name="UI" parent="." instance=ExtResource("3_86d2a")]
 process_mode = 3

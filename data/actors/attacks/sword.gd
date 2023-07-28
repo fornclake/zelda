@@ -1,7 +1,6 @@
 extends Attack
 
 @onready var anim = $AnimationPlayer
-@onready var hitbox = $Hitbox
 
 const SOUNDS = [
 	preload("res://data/sfx/LA_Sword_Slash1.wav"),
@@ -32,6 +31,7 @@ func activate(u) -> void:
 	actor_type = user.actor_type
 	user.current_state = user.state_swing
 	user.connect("on_hit", queue_free)
+	user.ray.add_exception(self)
 	position = user.position
 	
 	anim.play(str("Swing", user.sprite_direction))
@@ -43,7 +43,7 @@ func _on_swing_finished() -> void:
 	queue_free()
 
 
-func _on_hitbox_body_entered(body) -> void:
+func _on_body_entered(body) -> void:
 	if body is Map:
 		var cell = body.local_to_map(target_cell_position)
 		body.slash(cell)

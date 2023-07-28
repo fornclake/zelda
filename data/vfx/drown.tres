@@ -1,0 +1,18 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://kyrb8d0n8vwr"]
+
+[ext_resource type="Texture2D" uid="uid://dpyua2nw7b0ba" path="res://data/vfx/drown.png" id="1_isa8a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpqd8"]
+atlas = ExtResource("1_isa8a")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpqd8")
+}],
+"loop": false,
+"name": &"default",
+"speed": 4.0
+}]

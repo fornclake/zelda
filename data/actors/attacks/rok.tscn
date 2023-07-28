@@ -3,16 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://bsdbtm20k5v8k" path="res://data/actors/attacks/rok.png" id="1_owenn"]
 [ext_resource type="Script" path="res://data/actors/attacks/rok.gd" id="1_tb4up"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v4qb2"]
-radius = 4.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_hyjif"]
+radius = 5.0
 
-[node name="Rok" type="Node2D"]
+[node name="Rok" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_tb4up")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_owenn")
 
-[node name="Hitbox" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_v4qb2")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hyjif")

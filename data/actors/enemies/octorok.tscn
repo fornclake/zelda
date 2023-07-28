@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://0n5vrqnoj5y4"]
+[gd_scene load_steps=9 format=3 uid="uid://0n5vrqnoj5y4"]
 
-[ext_resource type="Script" path="res://data/enemies/octorok.gd" id="1_1xorg"]
-[ext_resource type="Texture2D" uid="uid://bpjsbq4wo1at7" path="res://data/enemies/octorok.png" id="1_5qjiv"]
+[ext_resource type="Script" path="res://data/actors/enemies/octorok.gd" id="1_1xorg"]
+[ext_resource type="Texture2D" uid="uid://bpjsbq4wo1at7" path="res://data/actors/enemies/octorok.png" id="1_5qjiv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m7ul3"]
 atlas = ExtResource("1_5qjiv")
@@ -59,15 +59,11 @@ animations = [{
 radius = 5.0
 height = 12.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xfqsk"]
-size = Vector2(12, 14)
-
 [node name="Octorok" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_1xorg")
-entity_type = 0
-hearts = 0.5
 speed = 40.0
+hearts = 0.5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1nyaj")
@@ -77,9 +73,3 @@ autoplay = "WalkDown"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CapsuleShape2D_14nd2")
-
-[node name="Hitbox" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_xfqsk")
