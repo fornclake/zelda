@@ -48,27 +48,27 @@ func state_swing() -> void:
 func state_drown() -> void:
 	# State init
 	if sprite.animation != "SwimDown":
-		Sound.play(DROWN_SFX)
-		drown_instantiated = false
 		sprite.animation = "SwimDown"
 		sprite.stop()
+		Sound.play(DROWN_SFX)
 	
 	# Show drown effect. Instance frees itself
-	if elapsed_state_time > 0.25 && not drown_instantiated:
-		_oneshot_vfx(DROWN_VFX)
+	if elapsed_state_time > 0.25:
 		sprite.hide()
-		drown_instantiated = true
-	
-	# Respawn at screen start
-	if elapsed_state_time > 1:
+		_oneshot_vfx(DROWN_VFX)
+		_change_state(state_respawning)
+
+
+func state_respawning() -> void:
+	if elapsed_state_time >= 1:
 		_respawn()
 
 
 func _respawn() -> void:
 	position = last_safe_position
-	_change_state(state_default)
 	sprite.show()
 	Sound.play(hit_sfx)
+	_change_state(state_default)
 
 
 func _on_scroll_completed() -> void:

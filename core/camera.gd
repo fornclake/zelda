@@ -69,7 +69,7 @@ func scroll_screen() -> void:
 	set_physics_process(true)
 
 
-func _set_limit_rect(rect) -> Rect2:
+func _set_limit_rect(rect : Rect2) -> Rect2:
 	limit_rect = rect
 	
 	limit_left = limit_rect.position.x
@@ -80,5 +80,5 @@ func _set_limit_rect(rect) -> Rect2:
 	return limit_rect
 
 
-func world_to_grid(pos) -> Vector2:
+func world_to_grid(pos : Vector2) -> Vector2:
 	return Vector2(floor(pos.x/CELL_SIZE.x), floor(pos.y/CELL_SIZE.y))

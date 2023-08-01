@@ -1,6 +1,7 @@
 @icon("res://editor/svg/Map.svg")
 class_name Map extends TileMap
 
+
 func on_step(actor : Actor) -> String:
 	var data = get_cell_tile_data(1, local_to_map(actor.position))
 	if data:

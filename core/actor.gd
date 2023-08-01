@@ -27,21 +27,19 @@ var ray : RayCast2D
 signal on_hit
 
 func _ready() -> void:
-	set_collision_layer_value(1, false)
-	set_collision_layer_value(2, true)
-	
-	ray = RayCast2D.new()
-	add_child(ray)
-	ray.target_position = Vector2.ZERO
-	ray.set_collision_mask_value(2, true) # collides with entities
-	ray.hit_from_inside = true
-	ray.collide_with_areas = true
-	
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = SHADER
 	
-	add_to_group("actor")
+	ray = RayCast2D.new()
+	ray.target_position = Vector2.ZERO
+	ray.hit_from_inside = true
+	ray.collide_with_areas = true
+	ray.set_collision_mask_value(2, true) # collides with entities
+	add_child(ray)
 	
+	set_collision_layer_value(1, false)
+	set_collision_layer_value(2, true)
+	add_to_group("actor")
 	#set_physics_process(false)
 
 
@@ -141,15 +139,17 @@ func _check_collisions():
 		if direction.y != 0 and collision.position.y != direction.y and not test_move(transform, Vector2(0, direction.y)):
 			collision.position.y = direction.y
 	
+	# Handle collisions
 	if ray.is_colliding():
 		var other = ray.get_collider()
+		
 		if other is Map:
 			var on_step = other.on_step(self)
 			if has_method(on_step):
 				call(on_step)
 		elif other is Actor or other is Attack:
 			if other.actor_type != actor_type and other.damage > 0:
-				hit(other.damage, other.position)
+				_hit(other.damage, other.position)
 
 
 func _oneshot_vfx(frames : SpriteFrames) -> void:
@@ -157,14 +157,14 @@ func _oneshot_vfx(frames : SpriteFrames) -> void:
 	new_fx.animation_finished.connect(new_fx.queue_free)
 	new_fx.position = position
 	new_fx.sprite_frames = frames
-	get_parent().add_child(new_fx)
 	new_fx.play()
+	get_parent().add_child(new_fx)
 
 
 # Setup hit state and switch
-func hit(amount, pos) -> void:
-	health -= amount
+func _hit(amount, pos) -> void:
 	velocity = (position - pos).normalized() * KB_AMT
+	health -= amount
 	Sound.play(hit_sfx)
 	emit_signal("on_hit", health)
 	_change_state(state_hurt)

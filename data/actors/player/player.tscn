@@ -226,5 +226,4 @@ frame_progress = 0.420857
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_h3sv4")
