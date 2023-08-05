@@ -1,16 +1,18 @@
-extends CanvasLayer
+class_name UI extends CanvasLayer
 
-@export_node_path("Actor") var target
+var target
+var hud : Node2D
+var hearts : Node2D
+var inventory : Node2D
 
-@onready var hud = $HUD
-@onready var hearts = $HUD/Hearts
-@onready var inventory = $Inventory
+
+func _init(p_target : Actor) -> void:
+	target = p_target
+
 
 func _ready():
-	target = get_node(target)
 	_inventory_changed(target.items)
 	inventory.connect("inventory_changed", _inventory_changed)
-	target.connect("on_hit", _target_on_hit)
 
 
 func _process(_delta):
@@ -19,10 +21,6 @@ func _process(_delta):
 			_close_inventory()
 		else:
 			_open_inventory()
-
-
-func _target_on_hit(new_health):
-	hearts.health = new_health
 
 
 func _inventory_changed(new_items):

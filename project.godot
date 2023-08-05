@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Zelda"
-run/main_scene="res://data/maps/overworld.tscn"
+run/main_scene="res://core/client.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://editor/icon.png"
 
@@ -26,6 +26,14 @@ DEF="*res://data/definitions.gd"
 window/size/viewport_width=640
 window/size/viewport_height=576
 window/stretch/mode="viewport"
+
+[dotnet]
+
+project/assembly_name="Zelda"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/map_editor/plugin.cfg")
 
 [importer_defaults]
 
