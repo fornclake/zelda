@@ -2,9 +2,10 @@
 @tool
 class_name Map extends TileMap
 
+
 @export var exits = {}
 
-enum Layer {DYNAMIC, STATIC}
+enum Layer {STATIC, DYNAMIC}
 
 class UniqueTile:
 	var source_id : int
@@ -27,8 +28,6 @@ class Exit:
 func _ready():
 	for cell in _get_exit_cells():
 		exits[cell] = Exit.new("res://")
-	
-	print(exits)
 
 
 func _get_exit_tiles() -> Array:

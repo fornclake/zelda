@@ -19,7 +19,7 @@ config/icon="res://editor/icon.png"
 
 ScreenFX="*res://core/vfx/screen_fx.tscn"
 Sound="*res://core/sound.gd"
-DEF="*res://data/definitions.gd"
+DEF="*res://core/definitions.gd"
 
 [display]
 

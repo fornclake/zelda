@@ -1,16 +1,16 @@
 @tool
 extends EditorPlugin
 
-var exit_property
+var inspector_plugin
 
 
 func _enter_tree():
-	exit_property = preload("res://addons/map_editor/exit_plugin.gd").new()
-	add_inspector_plugin(exit_property)
+	inspector_plugin = preload("res://addons/map_editor/map_inspector.gd").new(get_editor_interface())
+	add_inspector_plugin(inspector_plugin)
 
 
 func _exit_tree():
-	remove_inspector_plugin(exit_property)
+	remove_inspector_plugin(inspector_plugin)
 
 
 func _handles(object):
