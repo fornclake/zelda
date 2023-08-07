@@ -19,15 +19,21 @@ class UniqueTile:
 
 
 class Exit:
-	var map_path : String
+	var entrance_name : String
+	var next_map : String
+	var next_entrance : String
 	
-	func _init(mp) -> void:
-		map_path = mp
+	func _init(en="", nm="", ne="") -> void:
+		entrance_name = en
+		next_map = nm
+		ne = next_entrance
 
 
 func _ready():
 	for cell in _get_exit_cells():
-		exits[cell] = Exit.new("res://")
+		if not cell in exits:
+			exits[cell] = Exit.new()
+			exits[cell].owner = self
 
 
 func _get_exit_tiles() -> Array:

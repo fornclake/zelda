@@ -1,6 +1,5 @@
 extends EditorInspectorPlugin
 
-
 var _editor_interface : EditorInterface
 
 var current_map : Map
@@ -11,6 +10,7 @@ class ExitEditor extends EditorProperty:
 	var option : OptionButton
 	var popup : PopupMenu
 	var exits : Dictionary
+	var selected_exit : Map.Exit
 	
 	var editor_panel : PanelContainer
 	
@@ -23,7 +23,7 @@ class ExitEditor extends EditorProperty:
 		
 		popup = option.get_popup()
 		
-		popup.add_icon_item(preload("res://editor/svg/ReloadSmall.svg"), " Reload")
+		popup.add_icon_item(preload("res://editor/svg/ReloadSmall.svg"), "Reload")
 		popup.add_separator()
 		
 		for exit in exits:
@@ -35,6 +35,9 @@ class ExitEditor extends EditorProperty:
 		editor_panel.hide()
 		set_bottom_editor(editor_panel)
 		add_child(editor_panel)
+		
+		var vbox = VBoxContainer.new()
+		editor_panel.add_child(vbox)
 	
 	
 	func reset_text():
@@ -42,14 +45,19 @@ class ExitEditor extends EditorProperty:
 	
 	
 	func edit_exits(exit_index):
-		if exit_index <= OPTION_COMMAND_COUNT:
-			option.selected = -1
-			editor_panel.hide()
-			reset_text()
-			#option.show_popup()
-		else:
-			editor_panel.show()
-			option.text = str(exits.keys()[exit_index - OPTION_COMMAND_COUNT - 1])
+		match exit_index:
+			0: # Reload
+				option.selected = -1
+				option.show_popup()
+				editor_panel.hide()
+				reset_text()
+			1: # Separator
+				pass
+			_:
+				var actual_index = exit_index - OPTION_COMMAND_COUNT - 1
+				editor_panel.show()
+				selected_exit = exits.keys()[actual_index]
+				option.text = str(exits.keys()[actual_index])
 
 
 func _init(editor_interface):
