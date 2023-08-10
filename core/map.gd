@@ -2,8 +2,6 @@
 @tool
 class_name Map extends TileMap
 
-@export var exits = {}
-
 enum Layer {STATIC, DYNAMIC}
 
 class UniqueTile:
@@ -16,12 +14,13 @@ class UniqueTile:
 		atlas_coords = ac
 		alternative_tile = at
 
+## Exits #####
+# Primarily managed by exit_editor.gd #
 
-func _ready():
-	reload_exits()
+@export var exits = {}
 
 
-func reload_exits():
+func reload_exits() -> void:
 	var exit_cells = _get_exit_cells()
 	for exit in exits.values():
 		if not exit.cell in exit_cells:
@@ -34,8 +33,7 @@ func reload_exits():
 			cell = cell,
 			name = "",
 			path = "",
-			next = ""
-		}
+			next = "" }
 
 
 func _get_exit_cells() -> Array:
@@ -65,7 +63,8 @@ func _get_exit_tiles() -> Array:
 	
 	return exit_tiles
 
-###
+##############
+## Gameplay ##
 
 func on_step(actor : Actor) -> String:
 	var data = get_cell_tile_data(Layer.STATIC, local_to_map(actor.position))
@@ -85,3 +84,5 @@ func slash(cell : Vector2i) -> void:
 		cut_fx.position = map_to_local(cell)
 		add_child(cut_fx)
 		erase_cell(Layer.DYNAMIC, cell)
+
+##############
