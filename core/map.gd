@@ -2,7 +2,6 @@
 @tool
 class_name Map extends TileMap
 
-
 @export var exits = {}
 
 enum Layer {STATIC, DYNAMIC}
@@ -18,22 +17,35 @@ class UniqueTile:
 		alternative_tile = at
 
 
-class Exit:
-	var entrance_name : String
-	var next_map : String
-	var next_entrance : String
-	
-	func _init(en="", nm="", ne="") -> void:
-		entrance_name = en
-		next_map = nm
-		ne = next_entrance
-
-
 func _ready():
-	for cell in _get_exit_cells():
-		if not cell in exits:
-			exits[cell] = Exit.new()
-			exits[cell].owner = self
+	reload_exits()
+
+
+func reload_exits():
+	var exit_cells = _get_exit_cells()
+	for exit in exits.values():
+		if not exit.cell in exit_cells:
+			exits.erase(exit.id)
+	
+	for cell in exit_cells:
+		if cell in exits.keys():
+			continue
+		exits[cell] = {
+			cell = cell,
+			name = "",
+			path = "",
+			next = ""
+		}
+
+
+func _get_exit_cells() -> Array:
+	var exit_cells = []
+	
+	for tile in _get_exit_tiles():
+		for cell in get_used_cells_by_id(Layer.STATIC, tile.source_id, tile.atlas_coords, tile.alternative_tile):
+			exit_cells.append(cell)
+	
+	return exit_cells
 
 
 func _get_exit_tiles() -> Array:
@@ -53,16 +65,7 @@ func _get_exit_tiles() -> Array:
 	
 	return exit_tiles
 
-
-func _get_exit_cells() -> Array:
-	var exit_cells = []
-	
-	for tile in _get_exit_tiles():
-		for cell in get_used_cells_by_id(Layer.STATIC, tile.source_id, tile.atlas_coords, tile.alternative_tile):
-			exit_cells.append(cell)
-	
-	return exit_cells
-
+###
 
 func on_step(actor : Actor) -> String:
 	var data = get_cell_tile_data(Layer.STATIC, local_to_map(actor.position))

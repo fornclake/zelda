@@ -21,6 +21,10 @@ ScreenFX="*res://core/vfx/screen_fx.tscn"
 Sound="*res://core/sound.gd"
 DEF="*res://core/definitions.gd"
 
+[debug]
+
+gdscript/warnings/exclude_addons=false
+
 [display]
 
 window/size/viewport_width=640
