@@ -1565,96 +1565,32 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(5374035, 393216, 1, 5242968, 393216, 1, 5374040, 393216, 1, 5505112, 393216, 1, 5439578, 393216, 1, 5308506, 393216, 1, 5242972, 393216, 1, 5374044, 393216, 1, 5505116, 393216, 1, 5374050, 393216, 1, 5374053, 393216, 1, 5242984, 393216, 1, 5308522, 393216, 1, 5374056, 393216, 1, 5505128, 393216, 1, 5439594, 393216, 1, 4522101, 393216, 1, 4522099, 393216, 1, 4653171, 393216, 1, 4784243, 393216, 1, 4784245, 393216, 1, 4653173, 393216, 1, 4522108, 393216, 1, 4653180, 393216, 1, 4784252, 393216, 1)
 script = ExtResource("2_corn8")
 exits = {
-Vector2i(11, 78): {
-"cell": Vector2i(11, 78),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(68, 45): {
-"cell": Vector2i(68, 45),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(71, 67): {
-"cell": Vector2i(71, 67),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(76, 1): {
-"cell": Vector2i(76, 1),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(82, 78): {
-"cell": Vector2i(82, 78),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(90, 23): {
-"cell": Vector2i(90, 23),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(103, 67): {
-"cell": Vector2i(103, 67),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(116, 78): {
-"cell": Vector2i(116, 78),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(162, 1): {
-"cell": Vector2i(162, 1),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(171, 45): {
-"cell": Vector2i(171, 45),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(200, 1): {
-"cell": Vector2i(200, 1),
-"name": "123",
-"next": "",
-"path": ""
-},
-Vector2i(229, 4): {
-"cell": Vector2i(229, 4),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(231, 56): {
-"cell": Vector2i(231, 56),
-"name": "",
-"next": "",
-"path": ""
-},
-Vector2i(243, 67): {
-"cell": Vector2i(243, 67),
-"name": "",
-"next": "",
-"path": ""
-}
-}
-metadata/terrain_autotiler = {
-"layers": {
-0: {
-"locked_cells": {}
-}
-},
-"version": "0.2.2"
+Vector2i(11, 78): Object(RefCounted,"script":null,"cell":Vector2i(11, 78),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(68, 45): Object(RefCounted,"script":null,"cell":Vector2i(68, 45),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(71, 67): Object(RefCounted,"script":null,"cell":Vector2i(71, 67),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(76, 1): Object(RefCounted,"script":null,"cell":Vector2i(76, 1),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(82, 78): Object(RefCounted,"script":null,"cell":Vector2i(82, 78),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(90, 23): Object(RefCounted,"script":null,"cell":Vector2i(90, 23),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(103, 67): Object(RefCounted,"script":null,"cell":Vector2i(103, 67),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(116, 78): Object(RefCounted,"script":null,"cell":Vector2i(116, 78),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(162, 1): Object(RefCounted,"script":null,"cell":Vector2i(162, 1),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(171, 45): Object(RefCounted,"script":null,"cell":Vector2i(171, 45),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(200, 1): Object(RefCounted,"script":null,"cell":Vector2i(200, 1),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(229, 4): Object(RefCounted,"script":null,"cell":Vector2i(229, 4),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(231, 56): Object(RefCounted,"script":null,"cell":Vector2i(231, 56),"path":"","next":Vector2i(0, 0),"label":"")
+,
+Vector2i(243, 67): Object(RefCounted,"script":null,"cell":Vector2i(243, 67),"path":"","next":Vector2i(0, 0),"label":"")
+
 }

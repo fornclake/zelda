@@ -14,11 +14,22 @@ class UniqueTile:
 		atlas_coords = ac
 		alternative_tile = at
 
-## Exits #####
-# Primarily managed by exit_editor.gd #
+###########
+## Exits ##
+# Primarily managed by exit_editor.gd
+class Exit:
+	var cell : Vector2i
+	var path : String
+	var next : Vector2i
+	var label : String
+	
+	func _init(p_cell : Vector2i, p_path := "", p_next := Vector2i(), p_label := ""):
+		cell = p_cell
+		path = p_path
+		next = p_next
+		label = p_label
 
 @export var exits = {}
-
 
 func reload_exits() -> void:
 	var exit_cells = _get_exit_cells()
@@ -27,13 +38,8 @@ func reload_exits() -> void:
 			exits.erase(exit.id)
 	
 	for cell in exit_cells:
-		if cell in exits.keys():
-			continue
-		exits[cell] = {
-			cell = cell,
-			name = "",
-			path = "",
-			next = "" }
+		if not cell in exits.keys():
+			exits[cell] = Exit.new(cell)
 
 
 func _get_exit_cells() -> Array:
@@ -65,7 +71,7 @@ func _get_exit_tiles() -> Array:
 
 ##############
 ## Gameplay ##
-
+#
 func on_step(actor : Actor) -> String:
 	var data = get_cell_tile_data(Layer.STATIC, local_to_map(actor.position))
 	
@@ -75,6 +81,7 @@ func on_step(actor : Actor) -> String:
 	return ""
 
 
+#
 func slash(cell : Vector2i) -> void:
 	var data = get_cell_tile_data(Layer.DYNAMIC, cell)
 	
