@@ -17,30 +17,28 @@ class UniqueTile:
 ###########
 ## Exits ##
 # Primarily managed by exit_editor.gd
-class Exit:
-	var cell : Vector2i
-	var path : String
-	var next : Vector2i
-	var label : String
-	
-	func _init(p_cell : Vector2i, p_path := "", p_next := Vector2i(), p_label := ""):
-		cell = p_cell
-		path = p_path
-		next = p_next
-		label = p_label
 
 @export var exits = {}
 
 func reload_exits() -> void:
 	var exit_cells = _get_exit_cells()
-	for exit in exits.values():
-		if not exit.cell in exit_cells:
-			exits.erase(exit.id)
+	for exit in exits.keys():
+		if not exit in exit_cells:
+			exits.erase(exit)
 	
 	for cell in exit_cells:
 		if not cell in exits.keys():
-			exits[cell] = Exit.new(cell)
+			exits[cell] = new_exit_dict(cell)
 
+
+func new_exit_dict(c) -> Dictionary:
+	var exit_dict = {
+		"cell": c,
+		"name": "",
+		"linked_map": "",
+		"linked_exit": Vector2i(),
+	}
+	return exit_dict
 
 func _get_exit_cells() -> Array:
 	var exit_cells = []
@@ -69,7 +67,7 @@ func _get_exit_tiles() -> Array:
 	
 	return exit_tiles
 
-##############
+##############v
 ## Gameplay ##
 #
 func on_step(actor : Actor) -> String:
