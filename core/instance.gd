@@ -17,3 +17,4 @@ func _enter_tree():
 	add_child(camera)
 	camera.target = player
 	map.add_child(player)
+	player.position = Vector2(119,82) * 16 # TEMP OVERWORLD DEFAULT STARTING LOCATION

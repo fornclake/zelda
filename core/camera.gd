@@ -2,7 +2,8 @@ class_name GridCamera extends Camera2D
 
 const DEFAULT_LIMIT_RECT = Rect2(-10000000, -10000000, 10000000, 10000000)
 const CELL_SIZE = Vector2(256, 176)
-const VIEWPORT_SIZE = Vector2(160, 144)
+const VIEWPORT_SIZE = Vector2(256, 176)
+const HUD_OFFSET = 0 # 16 when hud is visible
 const SCROLL_DURATION = 0.5
 
 @export var target : Node2D
@@ -57,7 +58,7 @@ func scroll_screen() -> void:
 	
 	position = scroll_from
 	scroll_to.x = clamp(scroll_to.x, scroll_to_min.x, scroll_to_max.x)
-	scroll_to.y = clamp(scroll_to.y, scroll_to_min.y - 16, scroll_to_max.y)
+	scroll_to.y = clamp(scroll_to.y, scroll_to_min.y - HUD_OFFSET, scroll_to_max.y)
 	
 	var tween = create_tween()
 	tween.tween_property(self, "position", scroll_to, SCROLL_DURATION)
@@ -74,7 +75,7 @@ func _set_limit_rect(rect : Rect2) -> Rect2:
 	
 	limit_left = limit_rect.position.x
 	limit_right = limit_rect.size.x
-	limit_top = limit_rect.position.y - 16
+	limit_top = limit_rect.position.y - HUD_OFFSET
 	limit_bottom = limit_rect.size.y
 	
 	return limit_rect
