@@ -27,8 +27,8 @@ gdscript/warnings/exclude_addons=false
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=704
+window/size/viewport_width=640
+window/size/viewport_height=576
 window/stretch/mode="viewport"
 
 [dotnet]

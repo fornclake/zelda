@@ -2,7 +2,7 @@ class_name GridCamera extends Camera2D
 
 const DEFAULT_LIMIT_RECT = Rect2(-10000000, -10000000, 10000000, 10000000)
 const CELL_SIZE = Vector2(256, 176)
-const VIEWPORT_SIZE = Vector2(256, 176)
+const VIEWPORT_SIZE = Vector2(160, 144)
 const HUD_OFFSET = 0 # 16 when hud is visible
 const SCROLL_DURATION = 0.5
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 	limit_rect = Rect2(origin, origin + CELL_SIZE)
 	
 	await get_tree().physics_frame # takes 2 frames for tilemap entities to initialize
-	await get_tree().physics_frame # make a signal for tilemap ready to await here
+	await get_tree().physics_frame # TODO make a signal for tilemap ready to await here
 	
 	if target.has_method("_on_scroll_completed"):
 		scroll_completed.connect(target._on_scroll_completed)
