@@ -1,9 +1,8 @@
-class_name Instance extends SubViewport
+class_name GameScene extends SubViewport
 
 var map : Map
 var player : Actor
 var camera : GridCamera
-
 
 func _init(map_path : String, p_player : Actor):
 	map = load(map_path).instantiate()
