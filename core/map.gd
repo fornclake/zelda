@@ -2,8 +2,9 @@
 @tool
 class_name Map extends TileMap
 
-enum Layer {STATIC, DYNAMIC}
+var scene: GameScene
 
+enum Layer {STATIC, DYNAMIC}
 class UniqueTile:
 	var source_id : int
 	var atlas_coords : Vector2i
@@ -14,10 +15,10 @@ class UniqueTile:
 		atlas_coords = ac
 		alternative_tile = at
 
-###########
 ## Exits ##
-# Primarily managed by exit_editor.gd
+###########
 
+# Primarily managed by exit_editor.gd
 @export var exits = {}
 
 func reload_exits() -> void:
@@ -39,6 +40,7 @@ func new_exit_dict(c) -> Dictionary:
 		"linked_exit": Vector2i(),
 	}
 	return exit_dict
+
 
 func _get_exit_cells() -> Array:
 	var exit_cells = []
@@ -67,23 +69,22 @@ func _get_exit_tiles() -> Array:
 	
 	return exit_tiles
 
-##############v
 ## Gameplay ##
-#
-func on_step(actor : Actor) -> String:
+##############
+
+func on_step(actor: Actor) -> String:
 	var cell = local_to_map(actor.position)
 	var data = get_cell_tile_data(Layer.STATIC, cell)
 	
-	if data.get_custom_data("is_exit") == true:
-		print(exits[cell])
+	if data.get_custom_data("is_exit") and actor == scene.player and actor.has_entered:
+		scene.change_map(exits[cell].linked_map, exits[cell].linked_exit)
 	if data.get_custom_data("on_step"):
 		return data.get_custom_data("on_step")
 	
 	return ""
 
 
-#
-func slash(cell : Vector2i) -> void:
+func slash(cell: Vector2i) -> void:
 	var data = get_cell_tile_data(Layer.DYNAMIC, cell)
 	
 	if data and data.get_custom_data("is_cuttable"):
@@ -92,5 +93,3 @@ func slash(cell : Vector2i) -> void:
 		cut_fx.position = map_to_local(cell)
 		add_child(cut_fx)
 		erase_cell(Layer.DYNAMIC, cell)
-
-##############

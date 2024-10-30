@@ -9,10 +9,13 @@ var input_direction:
 
 var last_safe_position : Vector2
 var drown_instantiated := false
-
+var has_entered = false
+const ENTRY_DISTANCE = 64 # how far from the map entrance you must walk to exit back through it
 
 func _physics_process(delta) -> void:
 	_state_process(delta)
+	if not has_entered:
+		has_entered = position.distance_squared_to(last_safe_position) > ENTRY_DISTANCE
 
 
 func state_default() -> void:
