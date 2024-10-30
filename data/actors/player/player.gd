@@ -68,6 +68,7 @@ func state_respawning() -> void:
 
 
 func _respawn() -> void:
+	has_entered = false
 	position = last_safe_position
 	sprite.show()
 	Sound.play(hit_sfx)
