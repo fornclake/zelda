@@ -3,7 +3,7 @@ class_name GridCamera extends Camera2D
 const DEFAULT_LIMIT_RECT = Rect2(-10000000, -10000000, 10000000, 10000000)
 const CELL_SIZE = Vector2(256, 176)
 const VIEWPORT_SIZE = Vector2(160, 144)
-const HUD_OFFSET = 0 # 16 when hud is visible
+const HUD_OFFSET = 16
 const SCROLL_DURATION = 0.5
 
 @export var target : Node2D

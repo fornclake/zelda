@@ -1,16 +1,13 @@
 class_name UI extends CanvasLayer
 
 var target
-var hud : Node2D
-var hearts : Node2D
-var inventory : Node2D
+@onready var hud = $HUD
+@onready var hearts = $HUD/Hearts
+@onready var inventory = $Inventory
 
 
-func _init(p_target : Actor) -> void:
-	target = p_target
-
-
-func _ready():
+func initialize(_target : Actor):
+	target = _target
 	_inventory_changed(target.items)
 	inventory.connect("inventory_changed", _inventory_changed)
 
