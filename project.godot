@@ -37,7 +37,7 @@ project/assembly_name="Zelda"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/map_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg", "res://addons/map_editor/plugin.cfg")
 
 [importer_defaults]
 
