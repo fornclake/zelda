@@ -71,9 +71,12 @@ func _get_exit_tiles() -> Array:
 ## Gameplay ##
 #
 func on_step(actor : Actor) -> String:
-	var data = get_cell_tile_data(Layer.STATIC, local_to_map(actor.position))
+	var cell = local_to_map(actor.position)
+	var data = get_cell_tile_data(Layer.STATIC, cell)
 	
-	if data:
+	if data.get_custom_data("is_exit") == true:
+		print(exits[cell])
+	if data.get_custom_data("on_step"):
 		return data.get_custom_data("on_step")
 	
 	return ""
