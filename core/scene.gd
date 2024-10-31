@@ -10,6 +10,7 @@ signal map_changed(map, entrance)
 func _init(map_path: String, p_entrance: Vector2i, p_player: Actor):
 	map = load(map_path).instantiate()
 	map.scene = self
+	map.z_index -= 1
 	camera = GridCamera.new()
 	player = p_player
 	entrance = p_entrance
@@ -48,6 +49,8 @@ func _on_camera_scroll_completed() -> void:
 
 func change_map(next_map, next_entrance):
 	player.has_entered = false
+	get_tree().paused = true
+	await ScreenFX.fade_white_in()
 	map.remove_child(player)
 	map_changed.emit(next_map, next_entrance)
 	queue_free()

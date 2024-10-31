@@ -9,7 +9,8 @@ var target
 func initialize(_target : Actor):
 	target = _target
 	_inventory_changed(target.items)
-	inventory.connect("inventory_changed", _inventory_changed)
+	inventory.inventory_changed.connect(_inventory_changed)
+	target.item_received.connect(_inventory_changed)
 
 
 func _process(_delta):

@@ -150,6 +150,12 @@ func _check_collisions():
 		elif other is Actor or other is Attack:
 			if other.actor_type != actor_type and other.damage > 0:
 				_hit(other.damage, other.position)
+		else:
+			_custom_collision(other)
+
+
+func _custom_collision(_other):
+	pass
 
 
 func _oneshot_vfx(frames : SpriteFrames) -> void:

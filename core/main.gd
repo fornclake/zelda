@@ -15,6 +15,8 @@ func _ready():
 
 
 func initialize_scene(map, entrance):
+	get_tree().paused = false
 	current_scene = GameScene.new(map, entrance, player)
 	current_scene.map_changed.connect(initialize_scene)
 	screen.add_child(current_scene)
+	await ScreenFX.fade_white_out()

@@ -1,7 +1,7 @@
 extends Actor
 
 var items = {
-	"B": DEF.ITEM.Sword
+	#"B": DEF.ITEM.Sword
 }
 
 var input_direction:
@@ -11,6 +11,8 @@ var last_safe_position : Vector2
 var drown_instantiated := false
 var has_entered = false
 const ENTRY_DISTANCE = 64 # how far from the map entrance you must walk to exit back through it
+
+signal item_received
 
 func _physics_process(delta) -> void:
 	_state_process(delta)
@@ -65,6 +67,26 @@ func state_drown() -> void:
 func state_respawning() -> void:
 	if elapsed_state_time >= 1:
 		_respawn()
+
+
+func _custom_collision(other) -> void:
+	if other is Pickup:
+		_pickup(other)
+
+
+func _pickup(pickup) -> void:
+	if items.has("B"):
+		if items.has("A"):
+			var slot = 0
+			while items.has(slot):
+				slot += 1
+			items[slot] = pickup.item
+		else:
+			items["A"] = pickup.item
+	else:
+		items["B"] = pickup.item
+	item_received.emit(items)
+	pickup.queue_free()
 
 
 func _respawn() -> void:

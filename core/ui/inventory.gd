@@ -68,6 +68,8 @@ func _swap_item(hud,inv):
 	items[inv] = swap
 	Sound.play(preload("res://data/sfx/LA_Menu_Select.wav"))
 	
+	if items[hud] == null:
+		items.erase(hud)
 	if items[inv] == null:
 		items.erase(inv)
 	
