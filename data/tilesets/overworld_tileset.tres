@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://blww4jrwxlr0s"]
 
-[ext_resource type="Texture2D" uid="uid://c1wx4yysldr80" path="res://data/maps/overworld.png" id="1_0wnek"]
+[ext_resource type="Texture2D" uid="uid://c1wx4yysldr80" path="res://data/tilesets/overworld.png" id="1_0wnek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ecyxb"]
 resource_name = "Overworld"
@@ -209,7 +209,7 @@ texture = ExtResource("1_0wnek")
 10:0/0/terrains_peering_bit/top_left_corner = 2
 10:0/0/terrains_peering_bit/top_side = 2
 10:0/0/terrains_peering_bit/top_right_corner = 2
-10:0/0/custom_data_1 = " "
+10:0/0/custom_data_1 = "drown"
 3:0/animation_columns = 4
 3:0/animation_frame_0/duration = 1.0
 3:0/animation_frame_1/duration = 1.0
