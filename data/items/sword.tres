@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemResource" load_steps=5 format=3 uid="uid://cwtf42b5g8mld"]
+
+[ext_resource type="Texture2D" uid="uid://bnrjw1taux5vj" path="res://data/items/sword-icon.png" id="1_765hk"]
+[ext_resource type="PackedScene" uid="uid://dhsyuyst7ybd6" path="res://data/actors/attacks/sword.tscn" id="2_dk8l3"]
+[ext_resource type="Script" path="res://core/item_resource.gd" id="3_vd70u"]
+[ext_resource type="Texture2D" uid="uid://bcdsfholic3ks" path="res://data/items/sword.png" id="4_ch158"]
+
+[resource]
+script = ExtResource("3_vd70u")
+scene = ExtResource("2_dk8l3")
+name = "Sword"
+icon = ExtResource("1_765hk")
+sprite = ExtResource("4_ch158")
+description = "A wooden sword."

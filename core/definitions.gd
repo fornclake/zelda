@@ -11,8 +11,3 @@ class ItemEntry:
 		name = resource.name
 		icon = resource.icon
 		description = resource.description
-
-
-var ITEM = {
-	Sword = ItemEntry.new(preload("res://core/ui/items/sword.tres"))
-}

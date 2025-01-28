@@ -3,7 +3,7 @@
 [ext_resource type="TileSet" uid="uid://blww4jrwxlr0s" path="res://data/tilesets/overworld_tileset.tres" id="1_la44s"]
 [ext_resource type="Script" path="res://core/map.gd" id="2_s6f2b"]
 [ext_resource type="PackedScene" uid="uid://0n5vrqnoj5y4" path="res://data/actors/enemies/octorok.tscn" id="4_ait1f"]
-[ext_resource type="Texture2D" uid="uid://bcdsfholic3ks" path="res://data/ui/items/sword.png" id="5_ss88j"]
+[ext_resource type="Texture2D" uid="uid://bcdsfholic3ks" path="res://data/items/sword.png" id="5_ss88j"]
 [ext_resource type="Script" path="res://core/spawn_layer.gd" id="6_bkrli"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_58tkg"]

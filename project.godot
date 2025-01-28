@@ -19,7 +19,7 @@ config/icon="res://editor/icon.png"
 
 ScreenFX="*res://core/vfx/screen_fx.tscn"
 Sound="*res://core/sound.gd"
-DEF="*res://core/definitions.gd"
+Global="*res://core/global.gd"
 
 [debug]
 
@@ -30,6 +30,7 @@ gdscript/warnings/exclude_addons=false
 window/size/viewport_width=640
 window/size/viewport_height=576
 window/stretch/mode="viewport"
+display_server/driver.linuxbsd="wayland"
 
 [dotnet]
 

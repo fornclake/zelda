@@ -1,8 +1,6 @@
 extends Actor
 
-var items = {
-	#"B": DEF.ITEM.Sword
-}
+var items = {}
 
 var input_direction:
 	get: return Input.get_vector("left", "right", "up", "down")
