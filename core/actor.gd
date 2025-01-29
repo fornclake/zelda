@@ -20,27 +20,51 @@ var last_state = state_default
 var elapsed_state_time := 0.0
 var sprite_direction := "Down"
 
-@onready var sprite : AnimatedSprite2D = $AnimatedSprite2D
-@onready var collision : CollisionShape2D = $CollisionShape2D
-var ray : RayCast2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var collision: CollisionShape2D = $CollisionShape2D
+var ray: RayCast2D
+var hitbox: Area2D
 
 signal on_hit
 
 func _ready() -> void:
+	add_to_group("actor")
+	
+	_init_shader()
+	_init_raycast()
+	_init_hitbox()
+	
+	ray.add_exception(hitbox)
+	
+	set_collision_layer_value(1, false)
+	set_collision_layer_value(2, true)
+
+
+func _init_shader() -> void:
 	sprite.material = ShaderMaterial.new()
 	sprite.material.shader = SHADER
-	
+
+
+func _init_raycast() -> void:
 	ray = RayCast2D.new()
 	ray.target_position = Vector2.ZERO
 	ray.hit_from_inside = true
 	ray.collide_with_areas = true
 	ray.set_collision_mask_value(2, true) # collides with entities
 	add_child(ray)
-	
-	set_collision_layer_value(1, false)
-	set_collision_layer_value(2, true)
-	add_to_group("actor")
-	#set_physics_process(false)
+
+func _init_hitbox() -> void:
+	# We want to make an area2D that is slightly larger than
+	#  the actor's current shape.
+	hitbox = Area2D.new()
+	var collision_shape = CollisionShape2D.new()
+	var rectangle_shape = RectangleShape2D.new()
+	var actor_size: Vector2 = collision.shape.size
+	hitbox.add_child(collision_shape)
+	collision_shape.shape = rectangle_shape
+	rectangle_shape.size = actor_size + Vector2.ONE
+	hitbox.set_collision_mask_value(2, true) # collides with entities
+	add_child(hitbox)
 
 
 func _physics_process(delta) -> void:
@@ -128,16 +152,19 @@ func _get_random_direction() -> Vector2:
 
 
 func _check_collisions():
+	var ray_offset = 2
+	var ray_length = 12
+	var collision_offset = 1
 	# Update raycast direction when moving
 	if velocity:
 		var direction = velocity.normalized()
-		ray.position = direction * -2
-		ray.target_position = direction * 12
+		ray.position = direction * -ray_offset
+		ray.target_position = direction * ray_length
 		
 		if direction.x != 0 and collision.position.x != direction.x and not test_move(transform, Vector2(direction.x, 0)):
-			collision.position.x = direction.x
+			collision.position.x = direction.x * collision_offset
 		if direction.y != 0 and collision.position.y != direction.y and not test_move(transform, Vector2(0, direction.y)):
-			collision.position.y = direction.y
+			collision.position.y = direction.y * collision_offset
 	
 	# Handle collisions
 	if ray.is_colliding():
@@ -147,11 +174,16 @@ func _check_collisions():
 			var on_step = other.on_step(self)
 			if has_method(on_step):
 				call(on_step)
-		elif other is Actor or other is Attack:
+		elif other is Attack:
 			if other.actor_type != actor_type and other.damage > 0:
 				_hit(other.damage, other.position)
 		else:
 			_custom_collision(other)
+	
+	for other in hitbox.get_overlapping_bodies():
+		if other is Actor:
+			if other.actor_type != actor_type and other.damage > 0:
+				_hit(other.damage, other.position)
 
 
 func _custom_collision(_other):
